@@ -1,0 +1,15 @@
+{
+  "name": "capstone",
+  "version": "1.0.0",
+  "description": "mqtt client server + apache spark analytics iot dashboard",
+  "main": "client_1.js",
+  "dependencies": {
+    "mqtt": "^2.18.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
