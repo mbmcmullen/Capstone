@@ -1,6 +1,6 @@
-#Iteration 2
+# Iteration 2
 
-###Sources:
+### Sources:
 
-+[Configuring initial Docker settings](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/)
++ [Configuring initial Docker settings](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/)
 
