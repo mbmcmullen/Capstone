@@ -1,0 +1,15 @@
+{
+  "name": "iteration_2",
+  "version": "1.0.0",
+  "description": "Capstone Iteration 2",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "mqtt": "^2.18.8"
+  },
+  "author": "",
+  "license": "ISC"
+}
