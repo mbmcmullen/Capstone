@@ -1,0 +1,14 @@
+{
+  "name": "Nodes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "node_1.js",
+  "scripts": {
+    "start": "node node_1.js"
+  },
+  "dependencies": {
+    "mqtt": "^2.18.8"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,32 @@
+version: '2'
+
+services: 
+
+  node-group-1:
+    build: ./Nodes
+    volumes:
+      - ./Nodes:/usr/src/app
+      - /usr/src/app/node_modules
+
+  mosquitto-broker:
+    image: eclipse-mosquitto
+    volumes:
+      - ./Mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - /mosquitto/data
+      - /mosquitto/log/mosquitto.log
+    ports: 
+      - 1883:1883
+      - 9001:9001
+    user: $UID
+
+  express-kpi:
+    build: ./ExpressKPI
+    volumes: 
+      - ./ExpressKPI:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 3001:80
+    depends_on:
+      - mosquitto-broker
+
+    
