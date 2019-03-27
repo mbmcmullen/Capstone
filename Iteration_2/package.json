@@ -1,0 +1,15 @@
+{
+  "name": "iteration_2",
+  "version": "1.0.0",
+  "description": "### Sources:",
+  "main": "client_1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "rxjs": "^6.4.0",
+    "rxjs-compat": "^6.4.0"
+  }
+}

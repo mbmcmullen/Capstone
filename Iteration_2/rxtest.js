@@ -26,6 +26,19 @@ const sub5 = combine.subscribe(x=>console.log('combined:'+x));
 const sub6 = avg.subscribe(x=>console.log('current average of subjects:'+x+'\n'));
 
 
+function createSource2(val =0){
+  return Observable.create(function(observer){
+    let value = val;
+    const interval = setInterval(()=>{
+      if (value%2 === 1){
+        observer.next(value);
+      }
+      if(value==5) observer.error(value);
+      value++;
+    },500);
+    return () => clearInterval(interval);
+  })
+}
 
 const source1 = Observable.create(function(observer){
   let value = 0;
@@ -39,22 +52,14 @@ const source1 = Observable.create(function(observer){
   return () => clearInterval(interval);
 })
 
-const source2 = Observable.create(function(observer){
-  let value = 0;
-  const interval = setInterval(()=>{
-    if (value%2 === 1){
-      observer.next(value);
-    }
-    value++;
-  },500);
-  return () => clearInterval(interval);
-})
+ 
 
 source1.subscribe(x => subject1.next(x));
 
-source2.subscribe(x =>subject2.next(x));
-
-
+function f(src, init) {
+   src(init).subscribe(x =>subject2.next(x), (err) => {console.log(`err: ${err}\n`); f(src,err+1)});
+}
+f(createSource2, 0);
 
 
 /*class myObserver extends Subject{
