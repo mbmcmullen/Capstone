@@ -18,11 +18,11 @@ client.subscribe('current_time/client_1')
 
 client.on('message', (topic, message) => {
     clientCurMessages.push(message.toString())
-    client.end()
+    //client.end()
 })
 
 app.get('/client1', (req, res) => {
-    res.send(clientCurMessages)
+    res.send({messages: clientCurMessages})
 })
 
 app.listen(PORT, HOST)
