@@ -16,19 +16,22 @@ app.get('/', (req, res) => {
 
 client.on('connect', () => {
     client.subscribe('current_time/client_1')
-    console.log('DEBUG: Server subscribed to topic: current_time/client_1')
+    client.subscribe('current_time/client_2')
+    client.subscribe('current_time/client_3')
+    console.log('DEBUG: Server subscribed to client topics')
 })
 
 client.on('message', (topic, message) => {
     console.log(`DEBUG: Server message - topic: ${topic}, message: ${message}`)
-    clientCurMessages.push(message.toString())
+    clientCurMessages.push({"topic": topic.toString(), "message": message.toString()})
     //client.end()
 })
 
-app.get('/client1', (req, res) => {
+app.get('/clients_all', (req, res) => {
     console.log(`DEBUG: Server clientCurMessages: ${clientCurMessages}`)
-    res.send({messages: clientCurMessages})
+    res.send({length: clientCurMessages.length, messages: clientCurMessages})
 })
+
 
 app.listen(PORT, HOST)
 console.log(`DEBUG: Running on http://${HOST}:${PORT}`)

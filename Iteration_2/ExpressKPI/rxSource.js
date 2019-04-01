@@ -3,7 +3,7 @@ const { map, filter, reduce } = require('rxjs/operators');
 const { Rx } = require('rxjs/Rx')
 
 //note: Source doesn't extend Observable but constructor returns a Subject 
-class Source{
+export default class Source{
     //createFunc: used to create and recreate the source when an error occurs
     //handle: used to handle errors
     //value: initial value
