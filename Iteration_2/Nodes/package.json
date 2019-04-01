@@ -1,13 +1,15 @@
 {
-  "name": "Nodes",
+  "name": "MQTT-Clients",
   "version": "1.0.0",
   "description": "",
   "main": "node_1.js",
   "scripts": {
-    "start": "node node_1.js"
+    "start": "concurrently \"node client_1.js\" \"node client_2.js\" \"node client_3.js\""
   },
   "dependencies": {
-    "mqtt": "^2.18.8"
+    "mqtt": "^2.18.8",
+    "concurrently": "^4.1.0"
+
   },
   "author": "",
   "license": "ISC"
