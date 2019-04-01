@@ -2,11 +2,9 @@ const { range, combineLatest,Subject, Observable, zip, merge} = require('rxjs');
 const { map, filter, reduce } = require('rxjs/operators');
 const { Rx } = require('rxjs/Rx')
 
-
 const subject1 = new Subject();
 const sum = subject1.scan((acc,x)=>acc+x);
 const count1 = subject1.scan((acc,x) => acc+1,0);
-
 
 const subject2 = new Subject();
 const count2 = subject2.scan((acc,x) => acc+1,0);
@@ -24,7 +22,6 @@ const sub4 = subject2.subscribe(x=>console.log('data recieved from subject2:'+x)
 const sub8 = count2.subscribe(x=>console.log('subject2 current count:'+x+'\n'));
 const sub5 = combine.subscribe(x=>console.log('combined:'+x));
 const sub6 = avg.subscribe(x=>console.log('current average of subjects:'+x+'\n'));
-
 
 function createSource2(val =0){
   return Observable.create(function(observer){
@@ -51,8 +48,6 @@ const source1 = Observable.create(function(observer){
   },1000);
   return () => clearInterval(interval);
 })
-
- 
 
 source1.subscribe(x => subject1.next(x));
 

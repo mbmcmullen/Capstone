@@ -2,12 +2,6 @@ version: '2'
 
 services: 
 
-  node-group-1:
-    build: ./Nodes
-    volumes:
-      - ./Nodes:/usr/src/app
-      - /usr/src/app/node_modules
-
   mosquitto-broker:
     image: eclipse-mosquitto
     volumes:
@@ -18,6 +12,14 @@ services:
       - 1883:1883
       - 9001:9001
     user: $UID
+
+  node-group-1:
+    build: ./Nodes
+    volumes:
+      - ./Nodes:/usr/src/app
+      - /usr/src/app/node_modules
+    depends_on:
+      - mosquitto-broker
 
   express-kpi:
     build: ./ExpressKPI
