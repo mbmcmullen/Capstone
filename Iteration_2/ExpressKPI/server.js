@@ -29,7 +29,7 @@ client.on('connect', () => {
 })
 
 client.on('message', (topic, message) => {
-    console.log(`DEBUG: Server message - topic: ${topic}, message: ${message}`)
+    //console.log(`DEBUG: Server message - topic: ${topic}, message: ${message}`)
     switch(topic) {
         case 'current_time/client_1':
             clientMessages.client_1 = JSON.parse(message.toString());
@@ -62,12 +62,25 @@ function mqttSource(){
          *      
          */ 
 
+        var conseqInvalid = 0;
+
         const interval = setInterval( () => {
-            if (clientMessages.client_1 && clientMessages.client_1 % 3 == 0){
+            console.log(`conseqInvlid = ${conseqInvalid}`)
+            conseqInvalid += 1
+            if (conseqInvalid > 3) {
+                observer.complete()
+            }
+            
+            // send error notification if client_1 time is over 2 seconds old
+            if (clientMessages.client_1.time && (Date.now() - clientMessages.client_1.time) > 2000){
+                conseqInvalid = 1
                 observer.error()
             }
-            observer.next(clientMessages.client_1)
-        }, 4000)
+            else {
+                conseqInvalid = 0
+                observer.next(clientMessages.client_1)
+            }
+        }, 1000)
         return () => clearInterval(interval)
     })
 }
@@ -80,7 +93,7 @@ function mqttSource(){
  *              data values to determine if it should send a 'complete' notification
  */
 let subject1 = new Source(mqttSource, () => {console.log('DEBUG: Server MqttSource ERROR')})
-//subject1.subscribe(x => console.log(`DEBUG: subject.subscribe ${x}`))
+subject1.subscribe(x => console.log(`DEBUG: subject.subscribe  time: ${x.time} value: ${x.value}\n`))
 
 //#endregion
 

@@ -9,7 +9,7 @@ function publishClient(i){
 
 function loopCurrentTime() {
     var i = 0;
-    var loop = setInterval( () => {publishClient(i++)}, 1000)
+    var loop = setInterval( () => {publishClient(Math.floor(Math.random() * 5))}, 6000)
 }
 
 client.on('connect', () => {
