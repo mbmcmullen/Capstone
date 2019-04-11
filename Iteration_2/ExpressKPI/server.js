@@ -20,8 +20,7 @@ function mqttSource(){
     
     return Observable.create( function(observer){
         const interval = setInterval( () => {
-            //console.log(`DEBUG mqttSource.next: ${clientCurMessages.client_1}`)
-            if (clientCurMessages.client_1 && clientCurMessages.client_1 % 3 == 0){
+            if (clientCurMessages.client_1 && clientCurMessages.client_1){
                 observer.error()
             }
             observer.next(clientCurMessages.client_1)
