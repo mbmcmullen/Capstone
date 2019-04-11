@@ -9,7 +9,6 @@
   "dependencies": {
     "mqtt": "^2.18.8",
     "concurrently": "^4.1.0"
-
   },
   "author": "",
   "license": "ISC"
