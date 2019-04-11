@@ -32,7 +32,7 @@ client.on('message', (topic, message) => {
     console.log(`DEBUG: Server message - topic: ${topic}, message: ${message}`)
     switch(topic) {
         case 'current_time/client_1':
-            clientMessages.client_1 = message.toString();
+            clientMessages.client_1 = JSON.parse(message.toString());
         case 'current_time/client_2':
 
         default :
@@ -80,7 +80,7 @@ function mqttSource(){
  *              data values to determine if it should send a 'complete' notification
  */
 let subject1 = new Source(mqttSource, () => {console.log('DEBUG: Server MqttSource ERROR')})
-subject1.subscribe(x => console.log(`DEBUG: subject.subscribe ${x}`))
+//subject1.subscribe(x => console.log(`DEBUG: subject.subscribe ${x}`))
 
 //#endregion
 
