@@ -45,6 +45,9 @@ client.on('message', (topic, message) => {
 
 //#region RxJS
 
+// this state variable needs a new home; can't seem to put it in the function mqttSource, try putting it in the Source class?
+var consecInvalid = 0;
+
 function mqttSource(){
     
     return Observable.create( function(observer){
@@ -62,22 +65,21 @@ function mqttSource(){
          *      
          */ 
 
-        var conseqInvalid = 0;
-
         const interval = setInterval( () => {
-            console.log(`conseqInvlid = ${conseqInvalid}`)
-            conseqInvalid += 1
-            if (conseqInvalid > 3) {
+            if (consecInvalid > 3) {
+                console.log(`consecInvalid = ${consecInvalid}`)
                 observer.complete()
             }
-            
+
             // send error notification if client_1 time is over 2 seconds old
             if (clientMessages.client_1.time && (Date.now() - clientMessages.client_1.time) > 2000){
-                conseqInvalid = 1
+                consecInvalid += 1
+                console.log(`conseqInvlid = ${consecInvalid}`)
                 observer.error()
             }
             else {
-                conseqInvalid = 0
+                consecInvalid = 0
+                console.log(`conseqInvlid = ${consecInvalid}`)
                 observer.next(clientMessages.client_1)
             }
         }, 1000)
@@ -92,7 +94,7 @@ function mqttSource(){
  *          This could become an issue when a specific error handler needs to access the number of 'invalid' 
  *              data values to determine if it should send a 'complete' notification
  */
-let subject1 = new Source(mqttSource, () => {console.log('DEBUG: Server MqttSource ERROR')})
+let subject1 = new Source(mqttSource, () => {console.log(`DEBUG: Server MqttSource ERROR\n`)})
 subject1.subscribe(x => console.log(`DEBUG: subject.subscribe  time: ${x.time} value: ${x.value}\n`))
 
 //#endregion
