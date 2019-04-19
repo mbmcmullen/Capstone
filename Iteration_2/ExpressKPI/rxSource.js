@@ -14,7 +14,11 @@ class Source {
     
     //src: the new source, created by createSrc function
     sub(src, errHandle){
-        src.subscribe( x => this.link.next(x), err => this.sub(this.createSrc(errHandle(err)), errHandle) )
+        console.log(`DEBUG Source.sub() called`)
+        src.subscribe( 
+            x => this.link.next(x), 
+            err => this.sub(this.createSrc(errHandle(err)), 
+            errHandle) )
     }
 }
 
@@ -22,3 +26,16 @@ module.exports = {
     Source: Source
 }
 
+
+
+/**
+ * Source 
+ *      on init:
+ *          1. Create a Subject that lasts for the duration of the objects life
+ *          2. Create an Observable using the createSrc function passed into it
+ *          3. Pass this Observable to the sub function with the errHandle function
+ *          4. sub function then subscribes to this Observable (src) using a 
+ *              recursive strategy 
+ */
+
+ 

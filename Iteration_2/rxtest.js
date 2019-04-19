@@ -23,6 +23,9 @@ const sub8 = count2.subscribe(x=>console.log('subject2 current count:'+x+'\n'));
 const sub5 = combine.subscribe(x=>console.log('combined:'+x));
 const sub6 = avg.subscribe(x=>console.log('current average of subjects:'+x+'\n'));
 
+Object.keys(subject1).map(x => console.log(`subject1[${x}] : ${subject1[x]}`))
+
+
 function createSource2(val =0){
   return Observable.create(function(observer){
     let value = val;

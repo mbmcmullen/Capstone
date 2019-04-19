@@ -9,7 +9,8 @@
   "dependencies": {
     "express": "^4.16.4",
     "mqtt": "^2.18.8",
-    "rxjs": "^6.4.0"
+    "rxjs": "^6.4.0",
+    "rxjs-compat": "^6.4.0"
   },
   "author": "",
   "license": "ISC"

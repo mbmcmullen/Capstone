@@ -1,7 +1,6 @@
-'use strict'
-
 const {Source} = require('./rxSource')
-const {Observable} = require('rxjs')
+const {Observable, Subject} = require('rxjs')
+const { Rx } = require('rxjs/Rx')
 
 const express = require('express')
 var mqtt = require('mqtt')
@@ -50,7 +49,8 @@ var consecInvalid = 0;
 
 function mqttSource(){
     
-    return Observable.create( function(observer){
+    return Observable.create( function subscribe(observer){
+        
         /**
          * TODO: 
          *      Check whether client message is current ( 'not stale': within specified time interval)
@@ -62,26 +62,30 @@ function mqttSource(){
          *      Define way to message client stating that current value is in 'stale/invalid' mode
          *          responsibility for handling error message from server is put on the client node. 
          *              if client wants to restart or keep sending error/ not sending current values, that's it's choice
-         *      
          */ 
 
+        console.log(`DEBUG mqttSource() called`)
+
         const interval = setInterval( () => {
-            if (consecInvalid > 3) {
+            if ( consecInvalid > 3) {
                 console.log(`consecInvalid = ${consecInvalid}`)
                 observer.complete()
             }
 
             // send error notification if client_1 time is over 2 seconds old
-            if (clientMessages.client_1.time && (Date.now() - clientMessages.client_1.time) > 2000){
-                consecInvalid += 1
-                console.log(`conseqInvlid = ${consecInvalid}`)
-                observer.error()
+            if ( clientMessages.client_1.time ) {
+                if ( (Date.now() - clientMessages.client_1.time) > 2000 ){
+                    consecInvalid += 1
+                    console.log(`conseqInvlid = ${consecInvalid}`)
+                    observer.error()
+                }
+                else {
+                    consecInvalid = 0
+                    console.log(`conseqInvlid = ${consecInvalid}`)
+                    observer.next(clientMessages.client_1.value)
+                }
             }
-            else {
-                consecInvalid = 0
-                console.log(`conseqInvlid = ${consecInvalid}`)
-                observer.next(clientMessages.client_1)
-            }
+
         }, 1000)
         return () => clearInterval(interval)
     })
@@ -94,8 +98,20 @@ function mqttSource(){
  *          This could become an issue when a specific error handler needs to access the number of 'invalid' 
  *              data values to determine if it should send a 'complete' notification
  */
+
 let subject1 = new Source(mqttSource, () => {console.log(`DEBUG: Server MqttSource ERROR\n`)})
-subject1.subscribe(x => console.log(`DEBUG: subject.subscribe  time: ${x.time} value: ${x.value}\n`))
+
+//Object.keys(subject1).map(x => console.log(`subject1[${x}] : ${subject1[x]}`))
+
+//console.log(`instanceof(subject1, Subject) : ${subject1 instanceof Subject }`)
+
+subject1.subscribe(x => console.log(`DEBUG: subject1 subscription value: ${x}\n`))
+
+//subject1.scan((acc,x)=>acc+x).subscribe(x=>console.log('subject1 current sum:'+x));
+
+//let subject2 = new Source(()=>{/*something happens*/})
+
+//subject2.subscribe(subject1)
 
 //#endregion
 
