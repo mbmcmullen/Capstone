@@ -1,5 +1,4 @@
 const rx = require("rxjs")
-const {throttleTime} = require('rxjs/operators/throttleTime')
 const { Rx } = require('rxjs/Rx')
 
 /**
@@ -37,15 +36,9 @@ function createSource(val = 0){
     function(observer) {
         let value = val;
         const interval = setInterval(()=>{
-            if (value === 5){
-                observer.error(`ERROR createSource() value : ${value}`);
-            } 
-            else {
-                observer.next(value)
-                //console.log(`createSource value : ${value}`)
-                value++;
-            }
-
+            console.log(`createSource value : ${value}\n`)
+            observer.next(value)
+            value++;
         }, 1000);
 
         return () => clearInterval(interval);
@@ -96,7 +89,7 @@ switch (observableAType) {
 
         //#endregion
 
-
+        break
     }
 
     case 'observable_create' : {
@@ -143,7 +136,8 @@ switch (observableAType) {
                     }
                     else {
                         if (curVal === 5) {
-                            observer.error(`Observable.create() Error value : ${curVal}`)
+                            console.log(`Observable.create() Error value : ${curVal}`)
+                            observer.error(curVal)
                         }
                         else {
                             observer.next(curVal)
@@ -160,7 +154,7 @@ switch (observableAType) {
 
         //#endregion
 
-
+        break
     }
 
     case 'interval' : {
@@ -181,7 +175,7 @@ switch (observableAType) {
         observableA = rx.interval(1000)
 
         //#endregion
-
+        break
     }
 
     case 'switchMap' : {
@@ -213,25 +207,30 @@ switch (observableAType) {
                     })
                     .catch(error => rx.Observable.of(x))
             )
+            .scan((accum, curVal) => {return curVal + accum})
+
 
         //#endregion
-
+        break
     }
 
     default : {
         console.log('observableA is being created with Rx.interval(1000)')
 
         observableA = rx.interval(1000);
+        break
     } 
 
 }
  
-console.log('Object.keys(observableA): ')
-Object.keys(observableA).map(x => console.log(`\tobservableA[${x}] : ${observableA[x]}`))
+//console.log('Object.keys(observableA): ')
+//Object.keys(observableA).map(x => console.log(`\tobservableA[${x}] : ${observableA[x]}`))
 console.log()
 
 var observerA = {
     next: (v) =>  {
+        if (v == 2)
+            throw new Error(`Observer A: ${v}`)
         console.log(`Observer A: ${v}\n`)
     }, 
     error: (err) => {
@@ -244,46 +243,43 @@ var observerA = {
 
 var subscriptionA = observableA.subscribe(observerA)
 
-var observableB = observableA.filter(
-    (x) => {
-        // if(x > 3) {
-        //     throw new Error(`ERROR Observable B : ${x}`)
-        // }
-        return x % 2 == 0
-    })
+// var observableB = observableA.filter(
+//     (x) => {
+//         return x % 2 == 0
+//     })
 
-var observerB = {
-    next: (v) =>  {
-        console.log(`Observer B : ${v}\n`)
-    }, 
-    error: (err) => {
-        console.log(`ERROR Observer B : ${err}\n`)
-    }, 
-    complete: () => {
-        console.log('COMPLETE Observer B \n')
-    }
-}
+// var observerB = {
+//     next: (v) =>  {
+//         console.log(`Observer B : ${v}\n`)
+//     }, 
+//     error: (err) => {
+//         console.log(`ERROR Observer B : ${err}\n`)
+//     }, 
+//     complete: () => {
+//         console.log('COMPLETE Observer B \n')
+//     }
+// }
 
-var subscriptionB = observableB.subscribe(observerB)
+// var subscriptionB = observableB.subscribe(observerB)
 
-var observableC = observableB.scan((accum, curVal) => {return curVal + accum})
+// var observableC = observableB.scan((accum, curVal) => {return curVal + accum})
 
-var observerC = {
-    next: (v) =>  {
-        console.log(`Observer C : ${v}\n`)
-        // if (v > 4) {
-        //     throw new Error(`Observer C Error value : ${v}`)
-        // }
-    }, 
-    error: (err) => {
-        console.log(`ERROR Observer C : ${err}\n`)
-    }, 
-    complete: () => {
-        console.log('COMPLETE Observer C \n')
-    }
-}
+// var observerC = {
+//     next: (v) =>  {
+//         console.log(`Observer C : ${v}\n`)
+//         // if (v > 4) {
+//         //     throw new Error(`Observer C Error value : ${v}`)
+//         // }
+//     }, 
+//     error: (err) => {
+//         console.log(`ERROR Observer C : ${err}\n`)
+//     }, 
+//     complete: () => {
+//         console.log('COMPLETE Observer C \n')
+//     }
+// }
 
-var subscriptionC = observableC.subscribe(observerC)
+// var subscriptionC = observableC.subscribe(observerC)
 
-//Rx.merge(observableA, observableB).subscribe(observer)
+// //Rx.merge(observableA, observableB).subscribe(observer)
 

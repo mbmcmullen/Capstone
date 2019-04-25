@@ -1,0 +1,26 @@
+Todo list for the last week or two of class:
+
+    Finalize Source class   
+        Extend Observerable functionality to back propagate a reset signal with the last known valid value 
+
+    Create Demo
+        Flight Angle of Attach Sensors with Pilot (user) feedback
+
+    Email Goyal regarding last 2 weeks of progress
+
+    Create final Report
+
+    Polish up Github 
+
+    
+A   B       0 == valid state
+
+0   0       
+
+0   1       B throws error on it's current value, sets own status to invalid, increments faultNum; 
+            B calls reset on self
+            After maxFaultNum reached call reset on A
+
+1   0       A will try to reset self after maxFaultNum reached 
+
+1   1       A will try to reset self first 

@@ -1,0 +1,34 @@
+1. Info Gathering
+	
+	a. Set goals for site
+
+	b. Define target audience
+
+	c. Research existing demo sites with ancilalary information
+
+
+A. Set goals for Site
+	
+	The goal of this site is to be an interactive web demo for users to see how the fault tolerant RxJS 'observable' we created fits a specific aviation use case. 
+
+	The use case which we will be demonstrating is the need for fault tolerance in reactive Angle of Attack sensors on airplanes in order for MCAS systems to make better and more reponsive decisions. 
+
+	Background information will be provided on the specific use case in order for the interactive demo to be contextualized 
+
+		(see source: https://spectrum.ieee.org/aerospace/aviation/how-the-boeing-737-max-disaster-looks-to-a-software-developer)
+
+	The user should be able to see an simplified MCAS system with 2 Angle of Attach (AOT) sensors as streaming data nodes and their current values. 
+
+
+B. Target Audience
+	
+	Prof. Goyal. If he doesn't understand or isn't impressed with our site then our grade is at stake. 
+
+	Prof. Zhoa is already impressed with the work and effort that we put into research and I'm not sure he prioritizes the gui demo of what we've created. 
+
+
+C. Existing Demo Sites to get Ideas from
+	
+	github.com/iamshaunjp/websockets-playlist
+
+	

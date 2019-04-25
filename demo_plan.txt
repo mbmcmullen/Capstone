@@ -1,0 +1,40 @@
+
+1. Info Gathering
+	
+	Set goals for site
+
+	Define target audience
+
+	Research existing demo sites with ancilalary information
+
+2. Planning
+
+	wireframe/mockup
+
+	sitemap
+	
+	Select technology stack
+
+3. Design 
+	
+	page layouts 
+
+	images, photos, videos, gifs
+
+	colors, fonts
+
+4. Content Writing & Assembly
+
+	communicate to audience
+
+5. Coding
+	
+	heirarchy interactivity added from sitemap
+
+	build and deploy
+
+6. Test & review
+
+	Upload website to server
+
+	Regression test

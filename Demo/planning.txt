@@ -1,0 +1,66 @@
+
+2. Planning
+
+	a. wireframe/mockup
+
+	b. sitemap
+	
+	c. Select technology stack
+
+
+A. Wireframe/ Mockup
+
+
+B. Sitemap
+
+	Homepage
+
+		>Reports
+
+			Reports 1, 2, Final
+
+			Presentations
+
+		>Background
+
+			Research Road map with Sources
+
+				(See emails and notes)
+
+			Example code snippets
+
+			Graphical Represenations
+
+		>Demo
+
+			Instructions
+
+			Video
+
+			Live console log 
+
+			Pilot Controls (up/down should work as well)
+
+			Responsive view of Right and Left Wing 
+
+			Live data values & status displayed in Dataflow graph
+
+		+Link to Github
+
+		+contact info
+
+
+C. Technology Stack
+
+	Sockets.io
+
+	Express Server
+
+	React
+
+	Rx.JS
+
+	Docker
+
+	Digital Ocean Droplet
+
