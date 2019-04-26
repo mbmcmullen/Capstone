@@ -3,9 +3,9 @@ import "./App.css";
 import { Header } from "./global/header";
 import { Switch, Route } from "react-router-dom";
 
-import PlaceOrder from "./main/PlaceOrder";
-import UpdatePredicted from "./main/UpdatePredicted";
-import Kitchen from "./main/Kitchen";
+import Reports from "./main/Reports";
+import Background from "./main/Background";
+import FlightSimulator from "./main/FlightSimulator";
 
 /*The <Route> component is the main part of React Router. Anywhere that you want to only render content based on the location’s pathname, you should use a <Route> element. */
 
@@ -19,9 +19,9 @@ class App extends Component {
       <div className="App">
         <Header />
         <Switch>
-          <Route exact path="/" component={PlaceOrder} />
-          <Route path="/updatepredicted" component={UpdatePredicted} />  
-          <Route path="/kitchen" component={Kitchen} />
+          <Route exact path="/" component={Background} />
+          <Route path="/reports" component={Reports} />  
+          <Route path="/flightsimulator" component={FlightSimulator} />
         </Switch>
       </div>
     );

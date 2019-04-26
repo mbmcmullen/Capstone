@@ -5,15 +5,9 @@ import "./header.css";
 
 // The Header creates links that can be used to navigate
 // between routes.
-var socket;
 class Header extends Component {
   constructor() {
     super();
-    this.state = {
-      endpoint: "http://localhost:3001/" // Update 3001 with port on which backend-my-app/server.js is running.
-    };
-
-    socket = socketIOClient(this.state.endpoint);
   }
 
   render() {
@@ -23,14 +17,14 @@ class Header extends Component {
           <ul className="NavClass">
             <li>
               <NavLink exact to="/">
-                Place Order
+                Background
               </NavLink>
             </li>
             <li>
-              <NavLink to="/updatepredicted">Change Predicted </NavLink>
+              <NavLink to="/reports"> Reports </NavLink>
             </li>
             <li>
-              <NavLink to="/kitchen"> Kitchen </NavLink>
+              <NavLink to="/flightsimulator"> Flight Simulator </NavLink>
             </li>
           </ul>
         </nav>
@@ -39,4 +33,4 @@ class Header extends Component {
   }
 }
 
-export { Header, socket };
+export { Header };

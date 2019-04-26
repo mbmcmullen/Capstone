@@ -29,7 +29,7 @@ B. Sitemap
 
 			Example code snippets
 
-			Graphical Represenations
+			Graphical Representations
 
 		>Demo
 
