@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Table, Container } from "reactstrap";
+import { Button, Table, Container, Row, Col } from "reactstrap";
 import socketIOClient from "socket.io-client";
 import { Graph } from 'react-d3-graph';
 
@@ -18,46 +18,56 @@ class FlightSimulator extends Component {
     }
 
     pilotUp() {
-        console.log(`current noseAngle: ${this.state.noseAngle}`)
         this.state.socket.emit("pilot_up", this.state.noseAngle)
+        console.log(`FlightSimulator.state.noseAngle : ${this.state.noseAngle} `)    
+    }
+
+    pilotDown() {
+        this.state.socket.emit("pilot_down", this.state.noseAngle)
+        console.log(`FlightSimulator.state.noseAngle : ${this.state.noseAngle} `)
     }
 
     render() {
         return (
-            <Container>
-                <h2 className="h2Class">Flight Simulator</h2>
-                <Table>
-                    <thead>
-                        <td>Dataflow Diagram</td>
-                        <td>Output and Controls</td>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <DAG></DAG>
-                            </td>
-                            <td>
-                                <Table>
-                                    <thead>Pilot Controls</thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <Button onClick={() => this.pilotUp()}>UP</Button>
-                                            </td>
-                                            <td>
-                                                Nose Angle: {this.state.noseAngle}
-                                            </td>
-                                            <td>
-                                                <Button onClick={() => console.log("DOWN!\n")}>DOWN</Button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </Table>
-                            </td>
-                        </tr>
-                    </tbody>
-                </Table>
-            </Container>
+            <div>
+                <Container>
+                    <Row>
+                    <h2 className="h2Class">Flight Simulator</h2>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <Table>
+                                <thead>
+                                    <td>Dataflow Diagram</td>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <DAG/>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </Col>
+                        <Col>
+                            <Table>
+                                <thead>Pilot Controls</thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <Button onClick={() => this.pilotUp()}>UP</Button>
+                                        </td>
+                                        <td>
+                                            Nose Angle: {this.state.noseAngle}
+                                        </td>
+                                        <td>
+                                            <Button onClick={() => this.pilotDown()}>DOWN</Button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         )
     }
 }
@@ -146,3 +156,4 @@ class DAG extends Component {
 
  
 export default FlightSimulator 
+
