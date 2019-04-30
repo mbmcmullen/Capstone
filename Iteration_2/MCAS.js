@@ -26,7 +26,7 @@ class MCAS{
                         else if(res <=0) this.result.next('up');
                         else this.result.next('none')
                     }else{
-                        this.result.next('invalid: variance overFlow')
+                        this.result.next('invalid')
                         this.restart();
                     }
                 }
@@ -41,7 +41,7 @@ class MCAS{
                     this.sensors[0].restart();
                 }
                 else{
-                    this.result.next('invalid: no valid input');
+                    this.result.next('invalid');
                     this.restart()
                 }
             }
