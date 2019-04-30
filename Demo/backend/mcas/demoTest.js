@@ -44,9 +44,9 @@ Object.keys(AoT1.result).map(x=>console.log(`sensor1.result[${x}]: ${AoT1.result
 
 mcas = new MCAS(args);
 
-mcas.subscribe(x => console.log(`mcas observer ${x}\n`))
+mcas.result.subscribe(x => console.log(`mcas observer ${x}\n`))
 
-combined = zip(mcas,pilot)
+combined = zip(mcas.result,pilot)
 combined.subscribe(([x,y])=>
     {
         console.log(`(${x},${y})`);
