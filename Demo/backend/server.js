@@ -2,7 +2,6 @@ const express = require("express");
 const http = require("http");
 const socketIO = require("socket.io");
 
-
 // our localhost port
 const port = process.env.PORT || 3001;
 
@@ -20,14 +19,14 @@ io.on("connection", socket => {
 
   // on pilot_up event increment received value and send it via a nose_angle event
   socket.on("pilot_up", (curVal) => {
-    //console.log(`ternary pilot_up: ${curVal < 15 ? curVal++ : curVal}`)
-    io.sockets.emit("nose_angle", curVal < 15 ? curVal++ : curVal)
+    // console.log(`ternary pilot_up: ${curVal < 15 ? curVal+1 : curVal}`)
+    io.sockets.emit("nose_angle", curVal < 15 ? curVal+1 : curVal)
   });
 
   // 
   socket.on("pilot_down", (curVal) => {
-    //console.log(`ternary pilot_down: ${curVal > 0 ? curVal-- : curVal}`)
-    io.sockets.emit("nose_angle", curVal > 0 ? curVal-- : curVal)
+    // console.log(`ternary pilot_down: ${curVal > 0 ? curVal-1 : curVal}`)
+    io.sockets.emit("nose_angle", curVal > 0 ? curVal-1 : curVal)
   })
 
   // disconnect is fired when a client leaves the server

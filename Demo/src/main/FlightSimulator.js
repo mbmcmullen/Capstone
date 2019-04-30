@@ -3,28 +3,36 @@ import { Button, Table, Container, Row, Col } from "reactstrap";
 import socketIOClient from "socket.io-client";
 import { Graph } from 'react-d3-graph';
 
+var socket = socketIOClient("http://localhost:3001/") 
+
 class FlightSimulator extends Component {
     constructor() {
         super()
         this.state = {
             // future possible values include aot node values and state
-            socket: socketIOClient("http://localhost:3001/"), 
             noseAngle: 3
         }
     }
 
     componentDidMount() {
-        this.state.socket.on("nose_angle", (newAngle) => this.setState({noseAngle: newAngle}))
+        document.addEventListener("keydown", (event) => {console.log(`event: ${event.which}`)}, false )
+        socket.on("nose_angle", (newAngle) => this.setState({noseAngle: newAngle}))
     }
 
+    // componentDidUpdate() {
+    //     socket.on("nose_angle", (newAngle) => this.setState({noseAngle: newAngle}))
+    //     console.log(`UPDATE FlightSimulator.state.noseAngle : ${this.state.noseAngle}`)
+
+    // }
+
     pilotUp() {
-        this.state.socket.emit("pilot_up", this.state.noseAngle)
-        console.log(`FlightSimulator.state.noseAngle : ${this.state.noseAngle} `)    
+        socket.emit("pilot_up", this.state.noseAngle)
+        // console.log(`FlightSimulator.state.noseAngle : ${this.state.noseAngle} `)    
     }
 
     pilotDown() {
-        this.state.socket.emit("pilot_down", this.state.noseAngle)
-        console.log(`FlightSimulator.state.noseAngle : ${this.state.noseAngle} `)
+        socket.emit("pilot_down", this.state.noseAngle)
+        // console.log(`FlightSimulator.state.noseAngle : ${this.state.noseAngle} `)
     }
 
     render() {
@@ -42,7 +50,7 @@ class FlightSimulator extends Component {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <DAG/>
+                                        <DAG noseAngle={this.state.noseAngle}/>
                                     </tr>
                                 </tbody>
                             </Table>
@@ -72,26 +80,34 @@ class FlightSimulator extends Component {
     }
 }
 
+class ObserverLog extends Component {
+    constructor(props) {
+        super(props)
+    }
+}
+
 class DAG extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
+            // noseAngle: this.props.noseAngle,
             data: {
-                nodes: [{ id: 'AOT 1', x: -50, y: 0}, { id: 'AOT 2', x: -50, y: 20 }, { id: 'DIFF', x: 0, y: 20 }, { id: 'PILOT', x: -20, y: -20 }, { id: 'NOSE DIRECTION', x: 30, y: 20}],
-                links: [{ source: 'AOT 1', target: 'DIFF' }, { source: 'AOT 2', target: 'DIFF' }, { source: 'DIFF', target: 'NOSE DIRECTION'}, {source: 'PILOT', target: 'NOSE DIRECTION'}]
+                nodes: [{ id: 'AOT 1', x: -100, y: -30}, { id: 'AOT 2', x: -100, y: 60 }, { id: 'DIFF', x: -30, y: 20 }, { id: `PILOT`, x: -20, y: 80 }, { id: `NOSE ANGLE: ${this.props.noseAngle}`, x: 40, y: 20}],
+                links: [] //[{ source: 'AOT 1', target: 'DIFF' }, { source: 'AOT 2', target: 'DIFF' }, { source: 'DIFF', target: `NOSE ANGLE: ${this.props.noseAngle}`}, {source: `PILOT ${this.props.noseAngle}`, target: `NOSE ANGLE: ${this.props.noseAngle}`}]
             },
             myConfig: {
                 nodeHighlightBehavior: true,
                 node: {
                     color: 'lightgreen',
-                    size: 300,
+                    size: 200,
                     highlightStrokeColor: 'blue'
                 },
                 link: {
                     highlightColor: 'lightblue'
                 }, 
                 directed: true, 
+                staticGraph: true, 
             }
         }
  
@@ -135,6 +151,14 @@ class DAG extends Component {
     };
 
     render() {
+
+        this.state.data = {
+            nodes: [{ id: 'AOT 1', x: -100, y: -30}, { id: 'AOT 2', x: -100, y: 60 }, { id: 'DIFF', x: -30, y: 20 }, { id: `PILOT`, x: -20, y: 80 }, { id: `NOSE ANGLE: ${this.props.noseAngle}`, x: 40, y: 20}],
+            links: [] //[{ source: 'AOT 1', target: 'DIFF' }, { source: 'AOT 2', target: 'DIFF' }, { source: 'DIFF', target: `NOSE ANGLE: ${this.props.noseAngle}`}, {source: `PILOT ${this.props.noseAngle}`, target: `NOSE ANGLE: ${this.props.noseAngle}`}]
+        }
+        console.log('DAG STATE ON RERENDER: \n')
+
+        // console.log(JSON.stringify(this.state.data, null, '\t'))
         return (
             <Graph
                 id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error

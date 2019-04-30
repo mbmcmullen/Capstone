@@ -60,6 +60,8 @@ C. Technology Stack
 
 	Rx.JS
 
+	D3.JS
+
 	Docker
 
 	Digital Ocean Droplet
