@@ -2,6 +2,7 @@ const {MCAS} = require('./mcas.js');
 const {Sensor} = require('./sensor.js');
 const socketIOClient = require("socket.io-client");
 const { Observable, zip } = require('rxjs')
+const { withLatestFrom } = require('rxjs/operators')
 
 var pilotState = 'none'
 var noseAngle = -3;
@@ -46,7 +47,7 @@ mcas = new MCAS(args);
 
 mcas.result.subscribe(x => console.log(`mcas observer ${x}\n`))
 
-combined = zip(mcas.result,pilot)
+combined = pilot.pipe(withLatestFrom(mcas.result))
 combined.subscribe(([x,y])=>
     {
         console.log(`(${x},${y})`);

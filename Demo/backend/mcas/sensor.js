@@ -14,7 +14,7 @@ class Sensor{
                 //console.log(`Math.sin(${value}): ${Math.sin(value)}`)
                 //observer.next( 7.5+(10*Math.sin(value*Math.PI/180)) ); 
             observer.next(func())
-            },1000);
+            },500);
             return () => clearInterval(interval);
         })
         .takeUntil(this.end$);
