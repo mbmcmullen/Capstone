@@ -19,14 +19,22 @@ io.on("connection", socket => {
 
   // on pilot_up event increment received value and send it via a nose_angle event
   socket.on("pilot_up", (curVal) => {
-    // console.log(`ternary pilot_up: ${curVal < 15 ? curVal+1 : curVal}`)
-    io.sockets.emit("nose_angle", curVal < 15 ? curVal+1 : curVal)
+    console.log(`SERVER pilot_up event recieved ${Date.now()} : ${curVal}\n`)
+    io.sockets.emit("pilot_up", curVal) 
+    console.log(`SERVER pilot_up event emitted ${Date.now()} : ${curVal}\n`)
   });
 
   // 
   socket.on("pilot_down", (curVal) => {
-    // console.log(`ternary pilot_down: ${curVal > 0 ? curVal-1 : curVal}`)
-    io.sockets.emit("nose_angle", curVal > 0 ? curVal-1 : curVal)
+    console.log(`SERVER pilot_down event recieved ${Date.now()} : ${curVal}\n`)
+    io.sockets.emit("pilot_down", curVal)
+    console.log(`SERVER pilot_down event emitted ${Date.now()} : ${curVal}\n`)
+  })
+
+  socket.on("nose_angle", (curVal) => {
+    console.log(`SERVER nose_angle event recieved ${Date.now()} : ${curVal}\n`)
+    io.sockets.emit("nose_angle", curVal)
+    console.log(`SERVER nose_angle event emitted ${Date.now()} : ${curVal}\n`)
   })
 
   // disconnect is fired when a client leaves the server
