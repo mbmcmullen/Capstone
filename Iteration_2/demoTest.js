@@ -38,12 +38,29 @@ var args = [AoT1,AoT2];
 
 //Object.keys(AoT1).map(x => console.log(`\tAoT1[${x}] : ${AoT1[x]}`))
 //Object.keys(AoT1.result).map(x => console.log(`\tAoT1.result[${x}] : ${AoT1.result[x]}`))
-AoT1.result.subscribe(x=>console.log(`AoT1.data: ${x.data}`))
-AoT2.result.subscribe(x=>console.log(`AoT2.data: ${x.data}`))
+AoT1.result.subscribe(x=>{
+    console.log(`AoT1.data: ${x.data}`);
+    socket.emit('aot1', x)
+})
+
+AoT2.result.subscribe(x=>{
+    console.log(`AoT2.data: ${x.data}`);
+    socket.emit('aot2', x)
+
+})
+
+socket.on('kill_aot1',()=>AoT1.status = 'invalid');
+socket.on('kill_aot2',()=>AoT2.status = 'invalid');
+
+socket.on('restart_aot1',()=>AoT1.status = 'valid');
+socket.on('restart_aot2',()=>AoT1.status = 'valid');
+
 Object.keys(AoT1.result).map(x=>console.log(`sensor1.result[${x}]: ${AoT1.result[x]}`))
 
 
 mcas = new MCAS(args);
+mcas.subscribe(x=>socket.emit('diff',x))
+
 combined = zip(MCAS,pilot)
 combined.result.subscribe((x,y)=>
     {
