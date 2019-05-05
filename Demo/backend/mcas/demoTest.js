@@ -26,7 +26,7 @@ var pilot = Observable.create(function(observer){
     const interval = setInterval(()=>{
         observer.next(pilotState);
         pilotState = 'none'
-    },1000);
+    },500);
     return () => clearInterval(interval);
   })
 

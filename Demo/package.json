@@ -7,14 +7,18 @@
     "d3": "^5.9.2",
     "d3-drag": "^1.2.3",
     "d3-force": "^2.0.1",
+    "moment": "^2.24.0",
+    "pondjs": "^0.8.10",
     "react": "^16.6.3",
     "react-d3-graph": "^2.0.1",
     "react-dom": "^16.6.3",
-    "react-html-table-to-excel": "^2.0.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
+    "react-timeseries-charts": "^0.15.5",
     "reactstrap": "^6.5.0",
-    "socket.io-client": "^2.2.0"
+    "ringjs": "0.0.1",
+    "socket.io-client": "^2.2.0",
+    "underscore": "^1.9.1"
   },
   "scripts": {
     "start": "react-scripts start",

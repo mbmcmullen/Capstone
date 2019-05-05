@@ -6,6 +6,7 @@ import { Switch, Route } from "react-router-dom";
 import Reports from "./main/Reports";
 import Background from "./main/Background";
 import FlightSimulator from "./main/FlightSimulator";
+import RealTimeChart from "./main/RealTimeChart"
 
 /*The <Route> component is the main part of React Router. Anywhere that you want to only render content based on the location’s pathname, you should use a <Route> element. */
 
@@ -14,7 +15,11 @@ import FlightSimulator from "./main/FlightSimulator";
 /* The <Switch> will iterate over routes and only render the first one that matches the current pathname */
 
 class App extends Component {
+  constructor(){
+    super()
+  }
   render() {
+
     return (
       <div className="App">
         <Header />
