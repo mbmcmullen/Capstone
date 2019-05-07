@@ -35,11 +35,15 @@ class realtime extends React.Component {
     constructor(props) {
         super(props)
         
+        console.log(`aot1: ${JSON.stringify(this.props.aot1)}`)
+
         this.state = {
             beginTime: new Date(),
             time: new Date(),
             events: new Ring(100),
             nose_angle_events: new Ring(200), 
+            aot1_events: new Ring(200), 
+            aot2_events: new Ring(200),
             socket: socketIOClient("http://localhost:3001/") 
         };
     }
@@ -57,31 +61,10 @@ class realtime extends React.Component {
 
     componentDidMount() {
         //
-        // Setup our aggregation pipelines
-        //
-
-        this.stream = new Stream();
-
-        //
         // Setup our interval to advance the time and generate raw events
         //
 
-        // const increment = 5 * sec;
-        // this.interval = setInterval(() => {
-        //     const t = new Date(this.state.time.getTime() + increment);
-        //     const event = this.getNewEvent(t);
-
-        //     // Raw events
-        //     const newEvents = this.state.events;
-        //     newEvents.push(event);
-        //     // console.log(JSON.stringify(event))
-        //     this.setState({ time: t, events: newEvents });
-
-        //     // Let our aggregators process the event
-        //     this.stream.addEvent(event);
-        // }, rate);
-
-        this.interval = setInterval(() => {
+        this.intervalNoseAngle = setInterval(() => {
             // const t = new Date(this.state.time.getTime()+sec)
             const t = new Date()
             const event = new TimeEvent(t, this.props.noseAngle)
@@ -89,16 +72,31 @@ class realtime extends React.Component {
             newNoseAngleEvents.push(event)
             this.setState({ time: t, nose_angle_events: newNoseAngleEvents });
             // console.log("nose_angle event handled in RealTimeChart")
-        }, 100)
+        }, 30)
 
+        this.intervalAot1 = setInterval(() => {
+            const t = new Date()
+            const event = new TimeEvent(t, this.props.aot1.data)
+            const newAot1Events = this.state.aot1_events
+            newAot1Events.push(event)
+            this.setState({time: t, aot1_events: newAot1Events})
+        }, 30)
         
-        // this.state.socket.on("nose_angle", (newAngle) => {
 
-        // })
+        this.intervalAot2 = setInterval(() => {
+            const t = new Date()
+            const event = new TimeEvent(t, this.props.aot2.data)
+            const newAot2Events = this.state.aot2_events
+            newAot2Events.push(event)
+            this.setState({time: t, aot2_events: newAot2Events})
+        }, 30)
+        
     }
 
     componentWillUnmount() {
-        clearInterval(this.interval);
+        clearInterval(this.intervalNoseAngle);
+        clearInterval(this.intervalAot1)
+        clearInterval(this.intervalAot2)
     }
 
     render() {
@@ -107,24 +105,47 @@ class realtime extends React.Component {
         const scatterStyle = {
             value: {
                 normal: {
-                    fill: "steelblue",
+                    fill: "#E74C3C",
                     opacity: 0.9
                 }
             }
         };
 
+        const styleAot1 = {
+            value: {
+                normal: {
+                    fill: "#2980B9",
+                    opacity: 0.9
+                }
+            }
+        }
+
+        const styleAot2 = {
+            value: {
+                normal: {
+                    fill: "#F1C40F", 
+                    opacity: 0.9
+                }
+            }
+        }
+
         //
         // Create a TimeSeries for our raw and nose_angle events
         //
 
-        // const eventSeries = new TimeSeries({
-        //     name: "raw",
-        //     events: this.state.events.toArray()
-        // });
-
         const noseAngleEventSeries = new TimeSeries({
             name: "nose_angle", 
             events: this.state.nose_angle_events.toArray()
+        })
+
+        const aot1EventSeries = new TimeSeries({
+            name: "aot1", 
+            events: this.state.aot1_events.toArray()
+        })
+
+        const aot2EventSeries = new TimeSeries({
+            name: "aot2", 
+            events: this.state.aot2_events.toArray()
         })
 
         // Timerange for the chart axis
@@ -132,36 +153,25 @@ class realtime extends React.Component {
         const timeWindow = 1 * minute;
 
         let beginTime = this.state.beginTime;
-        // const endTime = new Date(this.state.time.getTime() + minute);
-        
-        // const endTime = new Date(initialBeginTime.getTime() + hours);
-
-
-        // if (endTime.getTime() - timeWindow < initialBeginTime.getTime()) {
-            // beginTime = initialBeginTime;
-        // } else {
-        //     beginTime = new Date(endTime.getTime() - timeWindow);
-        // }
-
         let endTime = new Date()
 
         if (endTime.getTime() - beginTime.getTime() > 5000){
             beginTime = new Date(endTime.getTime() - 5000)
-            console.log(`CONDITIONAL: ${endTime.getTime() - beginTime.getTime()}`)
+            // console.log(`CONDITIONAL: ${endTime.getTime() - beginTime.getTime()}`)
         }
 
-        // beginTime = new Date(beginTime.getTime() - timeWindow)
         const timeRange = new TimeRange(beginTime, endTime);
-        console.log(`\ncurrent time : ${(new Date()).getTime()}`)
-        console.log(`beginTime : ${beginTime.getTime()}`)
-        console.log(`endTime : ${endTime.getTime()}`)
-        console.log(`timeRange : ${timeRange.toString()}`)
+        // console.log(`\ncurrent time : ${(new Date()).getTime()}`)
+        // console.log(`beginTime : ${beginTime.getTime()}`)
+        // console.log(`endTime : ${endTime.getTime()}`)
+        // console.log(`timeRange : ${timeRange.toString()}`)
 
         // Charts (after a certain amount of time, just show hourly rollup)
         const charts = (
             <Charts>
-                {/* <ScatterChart axis="y" series={eventSeries} style={scatterStyle} /> */}
-                <ScatterChart axis="y" series={noseAngleEventSeries} style={scatterStyle} />                
+                <ScatterChart axis="y" series={noseAngleEventSeries} style={scatterStyle} />   
+                <ScatterChart axis="y" series={aot1EventSeries} style={styleAot1} />
+                <ScatterChart axis="y" series={aot2EventSeries} style={styleAot2} />
             </Charts>
         );
 
@@ -175,7 +185,7 @@ class realtime extends React.Component {
         const style = styler([
             { key: "aot1", color: "#2980B9", width: 1, dashed: true },
             { key: "aot2", color: "#F1C40F", width: 2 },
-            { key: "pilot", color: "#27AE60", width: 2 }
+            { key: "nose_angle", color: "#E74C3C", width: 2 }
         ]);
 
         return (
@@ -197,9 +207,9 @@ class realtime extends React.Component {
                                     style: { fill: "#F1C40F" }
                                 },
                                 {
-                                    key: "pilot",
-                                    label: "PILOT",
-                                    style: { fill: "#27AE60" }
+                                    key: "nose_angle",
+                                    label: "NOSE ANGLE",
+                                    style: { fill: "#E74C3C" }
                                 }
                             ]}
                         />

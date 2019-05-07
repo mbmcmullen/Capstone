@@ -60,16 +60,16 @@ io.on("connection", socket => {
     console.log(`SERVER restart_aot2 event emitted ${Date.now()} \n`)
   })
 
-  socket.on("aot_1", (aot1) => {
-    console.log(`SERVER aot_1 event recieved ${Date.now()} : ${aot1}\n`)
-    io.sockets.emit("aot_1", aot1)
-    console.log(`SERVER aot_1 event emitted ${Date.now()} : ${aot1}\n`)
+  socket.on("aot1", (aot1) => {
+    console.log(`SERVER aot1 event recieved ${Date.now()} : ${JSON.stringify(aot1)}\n`)
+    io.sockets.emit("aot1", aot1)
+    console.log(`SERVER aot1 event emitted ${Date.now()} : ${JSON.stringify(aot1)}\n`)
   })
 
-  socket.on("aot_2", (aot2) => {
-    console.log(`SERVER aot_2 event recieved ${Date.now()} : ${aot2}\n`)
-    io.sockets.emit("aot_2", aot2)
-    console.log(`SERVER aot_2 event emitted ${Date.now()} : ${aot2}\n`)
+  socket.on("aot2", (aot2) => {
+    console.log(`SERVER aot2 event recieved ${Date.now()} : ${JSON.stringify(aot2)}\n`)
+    io.sockets.emit("aot2", aot2)
+    console.log(`SERVER aot2 event emitted ${Date.now()} : ${JSON.stringify(aot2)}\n`)
   })
 
   // disconnect is fired when a client leaves the server

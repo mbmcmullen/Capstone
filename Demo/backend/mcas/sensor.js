@@ -23,7 +23,8 @@ class Sensor{
 
     restart(){
         this.end$.next();
-        setTimeout(this.subscribe,1000);
+        this.subscribe();
+        // setTimeout(this.subscribe,1000);
     }
 }
 module.exports = {Sensor:Sensor};

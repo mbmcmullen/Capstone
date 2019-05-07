@@ -89,21 +89,17 @@ class DAG extends Component {
                 {source: `PILOT`, target: `NOSE ANGLE`}],
         }
 
-
-        console.log('DAG STATE ON RERENDER: \n')
-
-        // console.log(JSON.stringify(this.state.data, null, '\t'))
         return (
             <Graph
                 id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
                 data={this.state.data}
                 config={this.state.myConfig}
-                onClickNode={this.onClickNode}
-                onRightClickNode={this.onRightClickNode}
-                onClickGraph={this.onClickGraph}
-                onClickLink={this.onClickLink}
-                onRightClickLink={this.onRightClickLink}
-                //onMouseOverNode={this.onMouseOverNode}
+                // onClickNode={this.onClickNode}
+                // onRightClickNode={this.onRightClickNode}
+                // onClickGraph={this.onClickGraph}
+                // onClickLink={this.onClickLink}
+                // onRightClickLink={this.onRightClickLink}
+                // onMouseOverNode={this.onMouseOverNode}
                 //onMouseOutNode={this.onMouseOutNode}
                 //onMouseOverLink={this.onMouseOverLink}
                 //onMouseOutLink={this.onMouseOutLink}

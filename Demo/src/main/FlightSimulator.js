@@ -13,9 +13,9 @@ class FlightSimulator extends Component {
 
         this.state = {
             // future possible values include aot node values and state
-            noseAngle: 3,
-            aot1: { value: 3, status: "valid"},
-            aot2: { value: 3, status: "valid"},
+            noseAngle: 0,
+            aot1: { data: 0, status: "valid"},
+            aot2: { data: 0, status: "valid"},
             socket: socketIOClient("http://localhost:3001/") 
         }
     }
@@ -31,50 +31,51 @@ class FlightSimulator extends Component {
         // update noseAngle on 'nose_angle' event from socket
         this.state.socket.on("nose_angle", (newAngle) => {
             this.setState({noseAngle: newAngle})
-            console.log(`nose_angle event recieved ${Date.now()} : ${newAngle}`)
+            // console.log(`nose_angle event recieved ${Date.now()} : ${newAngle}`)
         })
         
         // update aot1 value and status 
-        this.state.socket.on("aot_1", (aot1) => {
-            this.setState({aot1: aot1})
+        this.state.socket.on("aot1", (newAot1) => {
+            this.setState({aot1: newAot1})
+            // console.log(`aot1 : ${JSON.stringify(this.state.aot1)}`)
         })
 
         // update aot2 value and status
-        this.state.socket.on("aot_2", (aot2) => {
-            this.setState({aot2: aot2})
+        this.state.socket.on("aot2", (newAot2) => {
+            this.setState({aot2: newAot2})
+            // console.log(`Set aot2 state`)
         })
         
     }
 
     pilotUp() {
         this.state.socket.emit("pilot_up", this.state.noseAngle)
-        console.log(`pilot_up event emitted ${Date.now()} : ${this.state.noseAngle} `)    
+        // console.log(`pilot_up event emitted ${Date.now()} : ${this.state.noseAngle} `)    
     }
 
     pilotDown() {
         this.state.socket.emit("pilot_down", this.state.noseAngle)
-        console.log(`pilot_down event emitted ${Date.now()} : ${this.state.noseAngle} `)
+        // console.log(`pilot_down event emitted ${Date.now()} : ${this.state.noseAngle} `)
     }
      
     killAot1() {
         this.state.socket.emit("kill_aot1", {})
-        console.log(`kill_aot1 event emitted ${Date.now()} `)
-        //this.setState({aot1Status: (this.state.aot1Status === "valid") ? "invalid" : "valid"})
+        // console.log(`kill_aot1 event emitted ${Date.now()} `)
     }
 
     killAot2() {
         this.state.socket.emit("kill_aot2", {})
-        console.log(`kill_aot2 event emitted ${Date.now()} `)
+        // console.log(`kill_aot2 event emitted ${Date.now()} `)
     }
 
     restartAot1() {
         this.state.socket.emit("restart_aot1", {})
-        console.log(`restart_aot1 event emitted ${Date.now()}`)
+        // console.log(`restart_aot1 event emitted ${Date.now()}`)
     }
 
     restartAot2() {
         this.state.socket.emit("restart_aot2", {})
-        console.log(`restart_aot2 event emitted ${Date.now()}`)
+        // console.log(`restart_aot2 event emitted ${Date.now()}`)
     }
 
     render() {
@@ -139,7 +140,11 @@ class FlightSimulator extends Component {
                         </Col>
                     </Row>
                     <Row>
-                        <Chart noseAngle={this.state.noseAngle}/>
+                        <Chart 
+                            noseAngle={this.state.noseAngle} 
+                            aot1={this.state.aot1} 
+                            aot2={this.state.aot2}
+                        />
                     </Row>
                 </Container>
             </div>

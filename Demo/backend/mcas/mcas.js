@@ -60,7 +60,9 @@ class MCAS{
             this.sensors.forEach(element => element.restart());
             console.log(`reached sensors.restart`)
         }
-        setTimeout(this.subscribe,500);
+        
+        this.subscribe()
+        // setTimeout(this.subscribe,500);
         
     }
 }
