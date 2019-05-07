@@ -45,7 +45,10 @@ Object.keys(AoT1.result).map(x=>console.log(`sensor1.result[${x}]: ${AoT1.result
 
 mcas = new MCAS(args);
 
-mcas.result.subscribe(x => console.log(`mcas observer ${x}\n`))
+mcas.result.subscribe(x => {
+    socket.emit('diff', x)
+    console.log(`MCAS diff event emitted: ${x}\n`)
+})
 
 combined = pilot.pipe(withLatestFrom(mcas.result))
 combined.subscribe(([x,y])=>

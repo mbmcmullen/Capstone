@@ -36,6 +36,7 @@ class realtime extends React.Component {
         super(props)
         
         this.state = {
+            beginTime: new Date(),
             time: new Date(),
             events: new Ring(100),
             nose_angle_events: new Ring(200), 
@@ -81,8 +82,8 @@ class realtime extends React.Component {
         // }, rate);
 
         this.interval = setInterval(() => {
-            const t = new Date(this.state.time.getTime()+sec)
-            // const t = new Date()
+            // const t = new Date(this.state.time.getTime()+sec)
+            const t = new Date()
             const event = new TimeEvent(t, this.props.noseAngle)
             const newNoseAngleEvents = this.state.nose_angle_events
             newNoseAngleEvents.push(event)
@@ -128,21 +129,32 @@ class realtime extends React.Component {
 
         // Timerange for the chart axis
         const initialBeginTime = new Date();
-        const timeWindow = 1 * hours;
+        const timeWindow = 1 * minute;
 
-        let beginTime;
+        let beginTime = this.state.beginTime;
         // const endTime = new Date(this.state.time.getTime() + minute);
-        const endTime = new Date(this.state.time.getTime());
+        
         // const endTime = new Date(initialBeginTime.getTime() + hours);
-        if (endTime.getTime() - timeWindow < initialBeginTime.getTime()) {
-            beginTime = initialBeginTime;
-        } else {
-            beginTime = new Date(endTime.getTime() - timeWindow);
+
+
+        // if (endTime.getTime() - timeWindow < initialBeginTime.getTime()) {
+            // beginTime = initialBeginTime;
+        // } else {
+        //     beginTime = new Date(endTime.getTime() - timeWindow);
+        // }
+
+        let endTime = new Date()
+
+        if (endTime.getTime() - beginTime.getTime() > 5000){
+            beginTime = new Date(endTime.getTime() - 5000)
+            console.log(`CONDITIONAL: ${endTime.getTime() - beginTime.getTime()}`)
         }
+
+        // beginTime = new Date(beginTime.getTime() - timeWindow)
         const timeRange = new TimeRange(beginTime, endTime);
-        console.log(`\ncurrent time : ${new Date()}`)
-        console.log(`beginTime : ${beginTime}`)
-        console.log(`endTime : ${endTime}`)
+        console.log(`\ncurrent time : ${(new Date()).getTime()}`)
+        console.log(`beginTime : ${beginTime.getTime()}`)
+        console.log(`endTime : ${endTime.getTime()}`)
         console.log(`timeRange : ${timeRange.toString()}`)
 
         // Charts (after a certain amount of time, just show hourly rollup)
@@ -223,3 +235,5 @@ class realtime extends React.Component {
 
 // Export example
 export default realtime;
+
+
