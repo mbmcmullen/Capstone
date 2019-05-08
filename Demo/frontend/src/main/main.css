@@ -1,0 +1,11 @@
+.control-button {
+    width: 30vmin;
+    margin: 5px;
+}
+
+.my-card {
+    margin: 5px;
+    width: 100%
+    /* background-color: #F4F6F6; */
+    /* padding: 10px 10px 10px 10px;  */
+}

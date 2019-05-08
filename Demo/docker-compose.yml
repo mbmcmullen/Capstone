@@ -1,0 +1,28 @@
+version: '2'
+
+services: 
+
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend:/usr/src/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend:/usr/src/app
+    ports:
+      - 3001:3001
+
+  mcas:
+    build: ./mcas
+    volumes:
+      - ./mcas:/usr/src/app
+      
+
+
+    
