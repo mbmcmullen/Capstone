@@ -5,7 +5,7 @@ const { Rx } = require('rxjs/Rx')
 class MCAS{
     constructor(parents){
         this.sensors = parents
-        this.result = new BehaviorSubject();
+        this.result = new Subject();
         this.end = new Subject();
         this.resets = 0;
         this.subscribe();
@@ -44,7 +44,8 @@ class MCAS{
                     this.result.next('invalid');
                     this.restart()
                 }
-            }
+            },
+            ()=>this.restart()
         )
              
     }
@@ -58,6 +59,7 @@ class MCAS{
         }
         else{
             this.sensors.forEach(element => element.restart());
+            this.resets = 0
             console.log(`reached sensors.restart`)
         }
         

@@ -116,7 +116,7 @@ combined.subscribe(([x,y])=>
                     console.log(`no nose_angle event emitted`)
                     break;
             }
-        }    
+        }
     })
 
     Object.keys(AoT1.result).map(x=>console.log(`sensor1.result[${x}]: ${AoT1.result[x]}\n`))
