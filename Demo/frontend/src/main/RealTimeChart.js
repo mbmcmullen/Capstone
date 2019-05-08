@@ -174,10 +174,10 @@ class realtime extends React.Component {
         );
 
         const dateStyle = {
-            fontSize: 12,
-            color: "#AAA",
+            fontSize: 18,
+            color: "#000000",
             borderWidth: 1,
-            borderColor: "#F4F4F4"
+            borderColor: "#AAAAAA"
         };
 
         const style = styler([
