@@ -72,6 +72,8 @@ mcas.result.subscribe(x => {
     log(`MCAS diff event emitted: ${x}\n`)
 })
 
+var conflicts = 0;
+
 combined = pilot.pipe(withLatestFrom(mcas.result))
 combined.subscribe(([pilot, mcas])=>
     {
@@ -95,7 +97,7 @@ combined.subscribe(([pilot, mcas])=>
                     break;
                 
             }
-        }else if(pilot === 'none'){
+        } else if (pilot === 'none') {
             switch(mcas){
                 case 'up':
                     noseAngle++;
@@ -113,6 +115,25 @@ combined.subscribe(([pilot, mcas])=>
                 case 'none':
                     log(`MCAS: no nose_angle event emitted`)
                     break;
+            }
+        } else if (pilot !== mcas) {
+            conflicts++
+            if (conflicts > 3){
+                switch(pilot){
+                    case 'up':
+                        noseAngle++;
+                        socket.emit('nose_angle', noseAngle);
+                        log(`PILOT: nose_angle event emitted ${Date.now()} : ${noseAngle}`)
+                        break;
+                    case 'down':
+                        noseAngle--;
+                        socket.emit('nose_angle',noseAngle);
+                        log(`PILOT: nose_angle event emitted ${Date.now()} : ${noseAngle}`)
+                        break;
+                    default:
+                        // reset conflicts to 0 after 3 have occured 
+                        conflicts = 0;
+                }
             }
         }
     })

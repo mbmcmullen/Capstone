@@ -33,11 +33,13 @@ class MCAS{
                 else if(a1.status === 'valid'){
                     if(a1.data >= 15) this.result.next('down');
                     else if(a1.data <=0) this.result.next('up');
+                    else this.result.next('none')
                     this.sensors[1].restart();
                 } 
                 else if(a2.status === 'valid'){
                     if(a2.data >= 15) this.result.next('down');
                     else if(a2.data <=0) this.result.next('up');
+                    else this.result.next('none')
                     this.sensors[0].restart();
                 }
                 else{

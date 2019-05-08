@@ -124,7 +124,7 @@ class FlightSimulator extends Component {
                                                 <Button className="control-button" onClick={() => this.pilotUp()}>UP</Button>
                                             </Col>
                                             <Col>
-                                                <p style={{fontSize:18}}>NOSE ANGLE: {this.state.noseAngle}</p>
+                                                <h4>NOSE ANGLE: {this.state.noseAngle}</h4>
                                             </Col>
                                             <Col>
                                                 <Button className="control-button" onClick={() => this.pilotDown()}>DOWN</Button>

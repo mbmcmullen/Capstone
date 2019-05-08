@@ -10,9 +10,17 @@ class Sensor{
     }
 
     subscribe(read){
+        var tempStatus = this.status
         Observable.create(function(observer){
             const interval = setInterval(()=>{
-                observer.next(read()+Math.random())
+                var curNoseAngle = read()
+
+                // add a bit of variance to aot sensor to simulate tolerances/turbulence 
+                var nextVal = curNoseAngle+Math.random()
+                // if (tempStatus === "valid"){
+                //     console.log(`AOT SENSOR status:${tempStatus}\tcurNoseAngle: ${curNoseAngle}\tNext val: ${nextVal}`)
+                // }
+                observer.next(nextVal)
             },500);
             return () => clearInterval(interval);
         })
