@@ -14,7 +14,7 @@ class FlightSimulator extends Component {
             noseAngle: 0,
             aot1: { data: 0, status: "valid"},
             aot2: { data: 0, status: "valid"},
-            socket: socketIOClient("http://backend:3001/") 
+            socket: socketIOClient("http://localhost:3001/") 
         }
     }
 

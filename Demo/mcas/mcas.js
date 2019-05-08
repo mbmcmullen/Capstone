@@ -20,7 +20,7 @@ class MCAS{
         AoT.subscribe(
             ([a1,a2])=>{
                 if((a1.status === 'valid')&&(a2.status === 'valid')){
-                    if(Math.abs(a1.data-a2.data)<.5){
+                    if(Math.abs(a1.data-a2.data) < .5){
                         let res = (a1.data+a2.data)/2;
                         if(res >= 15) this.result.next('down');
                         else if(res <=0) this.result.next('up');
@@ -51,7 +51,6 @@ class MCAS{
     }
 
     restart(){
-
         this.end.next();
         if(this.resets<3){
             this.resets++

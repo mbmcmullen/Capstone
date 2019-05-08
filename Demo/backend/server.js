@@ -10,7 +10,7 @@ const app = express();
 // our server instance
 const server = http.createServer(app);
 
-const debug = false;
+const debug = true;
 
 // This creates our socket using the instance of the server
 const io = socketIO(server);

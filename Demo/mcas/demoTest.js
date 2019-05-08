@@ -4,11 +4,11 @@ const socketIOClient = require("socket.io-client");
 const { Observable, zip } = require('rxjs')
 const { withLatestFrom } = require('rxjs/operators')
 
-const debug = false;
+const debug = true;
 var pilotState = 'none'
 var noseAngle = -3;
 
-var socket = socketIOClient("http://backend:3001/");
+var socket = socketIOClient("http://localhost:3001/");
 socket.on('connect', socket => {
     console.log('demo connected')
 })
@@ -73,48 +73,45 @@ mcas.result.subscribe(x => {
 })
 
 combined = pilot.pipe(withLatestFrom(mcas.result))
-combined.subscribe(([x,y])=>
+combined.subscribe(([pilot, mcas])=>
     {
-        // log(`(?,?): (${x},${y})`);
+        log(`(pilot, mcas): (${pilot},${mcas})`);
 
-        if(x==y||x==='none'||x==='invalid'){
-            switch(y){
+        if(pilot == mcas || mcas === 'none' || mcas === 'invalid'){
+            switch(pilot){
                 case 'up':
                     noseAngle++;
                     socket.emit('nose_angle', noseAngle);
-                    log(`nose_angle event emitted ${Date.now()} : ${noseAngle}`)
+                    log(`PILOT: nose_angle event emitted ${Date.now()} : ${noseAngle}`)
                     break;
                 case 'down':
                     noseAngle--;
                     socket.emit('nose_angle',noseAngle);
-                    log(`nose_angle event emitted ${Date.now()} : ${noseAngle}`)
-                    break;
-                case 'invalid':
-                    log(`no nose_angle event emitted`)
+                    log(`PILOT: nose_angle event emitted ${Date.now()} : ${noseAngle}`)
                     break;
                 case 'none':
-                    log(`no nose_angle event emitted`)
+                    socket.emit('nose_angle', noseAngle)
+                    log(`PILOT: nose_angle event emitted`)
                     break;
-                case 'default':
-                    log(`no nose_angle event emitted`)
+                
             }
-        }else if(y==='none'){
-            switch(x){
+        }else if(pilot === 'none'){
+            switch(mcas){
                 case 'up':
                     noseAngle++;
                     socket.emit('nose_angle',noseAngle);
-                    log(`nose_angle event emitted ${Date.now()} : ${noseAngle}`)
+                    log(`MCAS: nose_angle event emitted ${Date.now()} : ${noseAngle}`)
                     break;
                 case 'down':
                     noseAngle--;
                     socket.emit('nose_angle',noseAngle);
-                    log(`nose_angle event emitted ${Date.now()} : ${noseAngle}`)
+                    log(`MCAS: nose_angle event emitted ${Date.now()} : ${noseAngle}`)
                     break;
                 case 'invalid':
-                    log(`no nose_angle event emitted`)
+                    log(`MCAS: no nose_angle event emitted`)
                     break;
                 case 'none':
-                    log(`no nose_angle event emitted`)
+                    log(`MCAS: no nose_angle event emitted`)
                     break;
             }
         }
