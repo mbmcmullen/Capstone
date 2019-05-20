@@ -1,0 +1,9 @@
+
+Should I be focused more on the Real Time Analysis or Real Time Visualization?
+	you mentioned that rendering and collecting the data are easy but that analysis would be difficult
+
+
+If I understand correctly, the analysis development environment I'm creating will be subscribed directly to the MQTT Broker and from there be able to direcly compute streaming analytics with the option of storing it. This development environment will then be hosted on a web server for access via an API from the data visualization server. 
+
+
+You mentioned that many clients want this to be a code free solution. With that in mind am I wrapping Apache Sparks Streaming analytics in a UI where a client can choose the functions and their inputs based on the available mqtt streams? 

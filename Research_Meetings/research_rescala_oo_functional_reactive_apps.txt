@@ -1,0 +1,129 @@
+
+Note on REScala: Bridging Between Object-oriented and Functional Style in Reactive Applications
+
+ABSTRACT 
+	(?) Observer pattern used in Object-Oriented software to implement reactive behavior
+
+	Alternative patterns to Observer Pattern:
+		FRP + OOP
+		(?) Dataflow programming
+
+	REScala - reactive language which intergrates concepts from event-based frunctional-reactive programming into the object-oriented world
+
+		functional declarative style complements advantages of OOP
+
+
+1. INTRODUCTION
+	OO reactive applications rely on Observer pattern 
+		(?) relies on the inversion of control to decouple the observers from observables
+
+		NOTE: this does little to manage the complexity
+
+	2 classes of alternative approaches to combat complexity of reactive apps:
+		1. Event-driven programming at the language level. Languages provide first-class representation for events. Referred to as EVENT-BASED LANGUAGES
+
+		2. Direct representation of reactive values and means to compose computations based on them, through dedicated abstractions
+
+			(?) synchronous dataflow languages
+			Refered to as REACTIVE LANGUAGES
+
+
+		RESEARCH: Reactive vs Event-based programming
+
+	Integration of aforementioned 2 classes of languages:
+		Event-based languages benefits:
+			integrate nicely with OO design
+			support OO modularity
+			encapsulation
+			late binding
+			fine grained updates of object state
+
+		Reactive languages benefits:
+			dependencies defined in declarative manor
+			update automatically performed @ runtime
+
+			cons:
+				do not support fine-grained changes to objects: 
+					Objects must be recomputed from scratch leading to an immutability constraint which does not integrate with OO modifiable state
+
+	Solution language proposed:
+		integrate reactive values with event system
+
+		Both events and reactive values are object attributes, as well as fields and methods exposed as part of the object interface
+
+		events and reactive values are composable through api
+			support a mixed OO & functional style in designing reactive systems
+
+
+2. PROBLEM STATEMENT
+
+	Traditionally, OO applications implement reactiviy by using Observer pattern. Limitations to this approach:
+
+		Dependencies are not specified by established by INVERSION OF CONTROL (reverses intuitive flow of apps, makes code harder to understand)
+
+		Separation of concerns difficult - reactive functionalities mixed with application logic
+
+		Since callbacks do not return a value, they are not composable, limiting extensibility, reuse, comprehension
+
+	2.1 EVENT-BASED LANGUAGES
+
+		Event composition allows one to express the application logic in a declarative manor
+
+		(?) implicit event
+
+		AOP - Aspect Oriented Programming:
+			separation of cross cutting concerns - concerns that span multiple concerns in the form of abstractions such as classes, modules, procedures, etc through the use of 'Advices'
+
+			Advices are additional behaviors specified to execute before or after a function without adding additional logic to all of the crosscuting concerned functions (these are termed 'pointcuts') 
+
+		(?) late binding
+
+		Limitations of event abstractions:
+			application control flow is inverted - updates are performed indirectly by event handlers that return void & don't support composition
+
+		Event definitions are hardly extensible and require careful preplanning
+
+	2.2 REACTIVE LANGUAGES
+
+		A reactive value (aka behavior or signal) is a language concept for expressing functional dependencies among values in a declarative way
+			Reactive values can depend on variables or other reactive values
+
+			When a dependency source changes the reactive value automatically triggers a change
+
+		Signals > Events:
+			funcitonal dependencies are expressed in a direct & declarative manor
+
+			Definition of the reactive behavior is not separated from the source of the change (reactive code easier to read)
+
+			Signals are reactive values and can therefore be composed
+
+	2.3 NEED FOR COMPLEMENTING EVENTS AND SIGNALS
+
+		Most of existing OO reactive applications are event-based, therefore rewriting all existing reactive applications to use signals is unfeasible. 
+
+	
+3. RESCALA
+	
+	3.2.1 Integrating Events into Signals
+		
+		OO & funcitonal style - important to manage state at boundary between imperative and functional fragments of code
+
+			REScala provides set of functions for converting events into signals so that event-based imperative sub-computations can be wrapped up and abstracted over functional computations
+
+		hold
+		list/last
+
+	3.2.2 Integrating Signals into Event-Driven Computations
+
+		snapshot 
+		toggle
+	
+	3.2.3 Lifting Functions on Ordinary Values to Functions on Signals
+
+		lift
+
+
+ANCILLARY RESEARCH:
+	source: https://stackoverflow.com/questions/21546456/what-happened-to-scala-react
+
+		What happened to Scala.React?

@@ -1,0 +1,31 @@
+FRP in JS  
+	from source: https://github.com/stoeffel/awesome-frp-js
+
+multipipe
+	source: https://github.com/juliangruber/multipipe
+
+	allows for the composition of streams into pipes
+	
+	write to the pipe and you're writing to the first stream
+	
+	read from the pipe and you're reading from the last stream
+
+	supports duplex streams but idk if it support transform streams
+
+
+bacon.js 
+	source: https://baconjs.github.io/
+
+	small funcitonal reactive programming lib for JS
+
+
+Highland 
+	high-level streams library for Node.js and the browser
+
+
+radioactive 
+	source: https://github.com/radioactive/radioactive
+
+	Native Functional Reactive API for Javascript
+
+	focuses on native integration with javascript rather than having all the bells and whistles that event-oriented FRP libraries provide (FRP enabled at the language level)

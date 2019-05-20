@@ -1,0 +1,55 @@
+meeting Tian 2/5/19
+
+QUESTIONS:
+	A data stream is a potentially infinite set of data that a pipeline can operate on. If we are using function composition to compose analytic nofunctions for data how do we separate the data into doiscrete quantum to generate results?
+		I understand how filtering, finding extremum, works. We just need to have a state variable that holds the last known extremum or just keep applying hte filtering function to thte stream 
+
+		But if we have a data stream with a function that computes the average we need to keep count of the number of items and their values so the last function in the pipeline will continually be altering the value. Is that correct?
+
+
+	Whats the difference between a Signal and Event as seen in Figure 2 of 'Rescala: Bridging Between OO & Funtional Style in ...'
+
+	How will be support the concurrency that is inherent in functional composition of streams through pipelines when javascript is single threaded?
+
+	Inverted dependencies? Inversion of control?
+
+Meeting
+
+	Main idea is to 'glue' iot devices together
+	
+	Existing Solutions are poor fits:
+		Microsoft debugging is impossible 
+			Either says it works or it doesnt work 
+
+		NodeRed is also very poor for debugging
+
+		Suspect thingsboard is also not efficient as it is non proramming language based
+			no integrated environment where you can run the code locally
+
+			need static testing and local development - then deploy to cloud if necessary
+
+
+	How to use node.js stream other streaming
+
+	Weakness of FRP
+		dealing with discrete events
+		funcitonal programming tends to know have 
+
+	Start with Node Stream to create a base functionality 
+		error handling - consider possiblility of passing callbacks
+
+	Node is Push based
+
+	look into Pull stream for nodejs
+
+	window vs point based kpi's 
+		create module that allows for the programmer to set their own window 
+			window be only time
+			
+			every iot data point has time stamp
+			
+			assume all devices are synchronized clocks
+
+			depend on time stamp (time that it was sent) rather than the system time 
+
+	

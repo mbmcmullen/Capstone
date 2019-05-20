@@ -1,0 +1,50 @@
+Focus on fault tolerance
+	READ papers from last year shared by Tian in the folder
+		Scala, Haskell
+
+
+	Qaulify what fault tolerance in the context of FRP 
+		If htere are already solutions to reactive (functional) js programming how do we distinguish ours?
+
+Refactoring RXJS for fault tolerance would be exceptionally difficult
+
+Fault tolernat Functional REactive Programming Paper
+	synchronous dataflow
+
+	Causal stream - what value you get right now does not depend on the future
+
+	static analysis and have compile time gaurantees 
+
+	behavior => signal => stream (now)
+		All of the above are now stream but transitioned over the years
+
+	continuous-time frp is ideal but ineffiencient therefore we use discrete-time frp
+
+	Motivational use for Monads
+		Expressions may throw exceptions 
+		Every result is a maybe (int or none)
+		Interpreter has to tediously patttern match to none or maybe
+
+		Monad lets you forgo pattern matching with maybe 
+
+		combinator : Fake plus and bind 
+
+		Monad lets you accumulate side effects in a functional way
+
+Fault-tolerant Distributed Reactive Programming 
+	*Tian is leaning towards this style
+
+	inverted control flow - 'hollywood style'; don't call us, we'll call you
+
+	actors - individual processes that communicate via messages
+
+	NOTE: don't think of signal as first-class function
+
+TODO:
+	Read papers
+		Look out for the things that authors ommit:
+			What aren't they mentioning that doesn't work
+
+	See how to implement RXJS functionality with fault tolerance capibilities (?)
+
+		

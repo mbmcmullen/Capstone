@@ -1,0 +1,62 @@
+
+
+Show the following cases:
+
+
+	Case 1:
+
+		AOT 1: valid
+
+		AOT 2: valid
+
+		Pilot: 
+			send up signal until just past limit, allow for mcas to kick in
+			send down signal until just past limit, allow for mcas to kick in
+
+			also show that the pilot can push past the limit but the mcas will kick in once the pilot has stopped sending rapid signals 
+			
+	Case 2: 
+
+		AOT 1: invalid 
+
+		AOT 2: valid
+
+		Pilot:
+			send up signal until just past limit, allow for mcas to kick in
+			send down signal until just past limit, allow for mcas to kick in
+	
+	Case 3:
+
+		AOT 1: invalid
+
+		AOT 2: invalid 
+
+		Pilot: 
+			send up signal just past limit
+			
+			bring nose angle back into valid range
+			
+			send down signal just past limit 
+			
+			bring nose angle back into valid range
+			
+			send down signal just past limit 
+
+			restart aot1 and allow for the nose angle to come back into a valid range
+
+			restart aot2
+
+Make sure to remark on how the variance of the aot1 and aot2 sensors can affect the readings (simulate natural turbulance)
+
+
+	
+
+https://www.atlasobscura.com/things-to-do/chicago-illinois/
+
+	40
+
+	53
+
+	67
+
+	

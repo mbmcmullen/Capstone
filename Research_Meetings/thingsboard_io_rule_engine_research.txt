@@ -1,0 +1,19 @@
+Thingsboard.io Rule Engine Research
+
+3 main components:
+	Message - incoming event (device protocol, Rest Api, etc)
+	
+	Rule Node - fucntion executed on incoming message
+
+	Rule Chain - nodes connected with each other with relations, outbound message of rule node is sent to next connected rule nodes
+
+
+Use Cases:
+	
+	Data validation and modification for incoming telemetry before persistence
+
+	Aggregate telemetery into related Asset
+
+	Create/Update/Clear alarms based on defined conditions
+
+	Integrate with external piplines like Kafka, Spark, AWS services

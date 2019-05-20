@@ -1,0 +1,68 @@
+
+Current Implementations of Node.js Stream library:
+	
+	readable-stream
+		package is a mirror of the streams implementations in Node.js
+
+		Guarantees a stable streams base (?) regardless of version of Node you are using
+
+		Pre-Node 0.10:
+			Prior to Node 0.10 implementing a stream meant extending the core Stream object. This was an EventEmitter that added a special pipe() method. 
+				State-management was a nightmare for non-trivial stream implementations pre-Node 0.10
+
+		Node 0.10:
+			Streams2
+				base Stream implementations that do a lot more than just pipe()
+
+				State management is almost entirely taken care of for you
+
+				Simply need to provide concrete implementations of some abstract methods
+
+				Backward compatibility emphasized:
+					Streams2 streams wont work like classic EventEmitter objects when piped together 
+
+					but...
+
+					when you pipe a Streams2 stream and an old-style EventEmmitter-based stream together, Streams2 will fall-back to 'compatibility-mode'
+
+		readable-stream:
+	 		allows for you to customize which specific version of node your application is compatibile with rather than relying on base implementations
+
+	 		Usage:
+	 			swap require('stream') with require('readable-stream')
+
+	through
+
+	pump	
+		pipes streams together and destroys all of them if one of them closes
+
+	combined-stream
+		Main functionality returns a new combined stream object
+		Appends streams one after another and fully processes one before continuing with the next
+
+	merge-stream
+		merges an arbitrary number of streams and returns a new stream
+
+		file streams are just concatenating the file contents one after the other		
+
+	delayed-stream
+		Buffers events from a stream until you are ready to handle them
+
+	split
+		Break up a stream and reassemble it so that each line is a chunk
+
+	stream-each
+		Iterate the data in the stream by calling the iterator function with (data, next) where data is a data chunk and next is a callback. 
+
+		Call next when you are ready to consume the next chunk.
+
+	merge2
+		merge multiple streams into one stream in sequence or parallel
+
+	map-stream
+		construct pipes of streams of events 
+
+	stream-combiner2
+		combine returns a stream tha twrites to the first stream and reads from the last stream
+
+	multistream_

@@ -1,0 +1,186 @@
+TODO:
+	1. Research: Arrows 
+	2. Research: Monads
+	3. JS streaming -> see file streaming
+	4. Search for something in nodejs that implements spark stream
+	5. Look into Spark spark stream (research paper)
+
+
+1. Research: Kleisli Arrows 
+	
+	source: en.wikipedia.org/wiki/Arrow_(computer_science)
+
+		arrows (bolts) type class describing computations in a declarative fashion
+
+		proposed as generalization of monads -> monads turned out to be a subset of arrows
+
+	
+	source: https://blog.ssanj.net/posts/2017-07-02-working-with-arrows-in-scala.html
+
+		TODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODOTODO
+
+	NOTE: did not find many intuitive resources for understanding Kleisli Arrows  
+
+2. Research: Monads
+	
+	source: youtube:'what is a monad - computerphile'
+
+		Monad is a type constructor (maybe, list, etc..) which has 2 possible types via functions:
+			1. return wrapped simple type
+			2. sequencing operation
+
+		Monads can capture effects:
+			writing to environments/files, capture failure, I/O, mutable state
+
+		supports pure programming with effects
+			pure functional programming doesn't have side effects so monads allow you todo impure things such as I/O
+
+		Use of effects is explicit in Types
+
+		Writing functions that work for any effect
+			function polymorphism
+			can run sequence of monads which have effects regardless of what their types are 
+
+	source: youtube: 'An intuitive Introduction to monads in under 10 minutes'
+
+		Def: A monad is the minimal amount of structure needed to overload fucntion composition in a way that 'performs an extra computation' on the intermediate value
+
+		Monads allow you to have polymorphic function composition 
+
+3. JS streaming -> see file streaming
+	
+	source: https://nodejs.org/dist/v10.14.2/docs/api/stream.html
+
+		4 types of streams:
+			writable, readable, duplex, transform (duplex streams that can modify or transform data as it is written and read)
+
+		All streams created by nodejs apis operate on strings and buffer objects
+			can also read objects in special mode
+
+		Buffering
+			both writable and readable streams store data in internal buffer than can be retrieved
+
+			once the buffer is full the stream will stop reading data form the resource until the data can be consumed (ie readable._read())
+
+			Duplex and transform streams maintain 2 buffers for reading and writing
+
+			Can specify encoding as well (utf8, etc ...)
+
+		Readable Streams
+			All readable streams implement the interface stream.Readable class
+
+			2 modes:
+				flowing - data is read form the underlying system automatically and provided asap using events via the EventEmitter interface
+				paused - stream.read() must be called explicitly
+
+				All readable streams begin in paused mode and can be switched by :
+					adding a 'data' event handler
+					calling the stream.resume() method
+					calling the stream.pipe() method to send data to a Writable stream
+
+			see docs for methods such as on, pipe, ...
+
+		API for Stream Implementors
+
+			easily implement streams using javascripts prototypal inheritance model
+
+			write class that extends one of the 4 basic types of basic stream classes (stream.Writable, stream.Readable, etc ..)
+
+4. Search for something in nodejs that implements spark stream
+	
+	EclairJs
+		
+		source: https://github.com/EclairJS/eclairjs-node
+
+			- provides nodejs bindings for spark; spark program runs remotely
+
+			- latest version of spark supported is 2.0.0 while the latest stable version of spark is 2.4.0
+
+			- nodejs bindings mirror the spark syntax for functionality but in a javascript way
+
+			- docker image available containing all dependencies @ https://hub.docker.com/r/eclairjs/minimal-gateway/
+
+			- support for development in Juypter notebooks
+
+			- methods that return a single spark object immediately return results, while those that return spark object arrays or js objects will return a promise and thus requires a callback fxn
+
+				- this is done because these calls can take a long time to return
+
+
+		source: https://databricks.com/session/eclairjs-node-js-apache-spark
+
+			EclairJs = Node.Js + Apache Spark
+
+			Why EclairJS?
+				- interactive & user-facing applications often developed in JS (node)
+					- npm provides largest package repo
+					- handles large #s simultaneous requests (single server can handle 10,000 reqs)
+					- computationaly-intensive workloads handed off to back-end engines
+				- Apache Spark can be the back-end engine
+					- Scalable, static & streaming data, Spark SQL, ML analytics, graph engine
+					- no Spark API for nodejs, hence EclairJS
+
+			NOTE: NO LONGER MAINTAINED
+
+		source: https://eclairjs.github.io/eclairjs-node/docs/jsdoc/module-eclairjs.SparkContext.html
+
+			API Documentation
+
+
+
+5. Look into Spark spark stream (research paper)
+
+	source: https://spark.apache.org/docs/latest/streaming-programming-guide.html
+
+		Custom receivers for StreamingContexts
+			receive data from custom sources and push into spark
+
+		
+
+
+	source: 'DRESS: A Rule Engine on Spark for Event Stream Processing' Chen, Yi; Bordbar, Behzad; Accessed through UWM Libraries 
+		
+		Abstract:
+			Rule-Based Systems (RBS) - process event streams and trigger actions according to pre-defined rule-sets in the form of IF-THEN-ELSE statements
+
+			Due to increase of IOT produced streams, current RBS face challenges related to speed, scalability, and fault tolerance
+
+			Rete Algorithm - most common backing algorithm for current rule engines
+
+			DRESS - Distributed Rule Engine on Spark Streaming; infrastructure for executing Rete Algorithm on Spark Streaming
+
+		Section 1. Intro
+
+			RBS advantages:
+				1. compile large numbers of rules to a graph and use graph optimization to reduce workload of the system
+
+				2. fills the gap between end users and computer scientists by enabling users to express events using Domain Specific Languages (DSLs)
+
+			Spark's job splitting creates better load balancing and fault tolerance 
+
+			Spark streaming treats streams as a series of short batch jobs creating better performance and fast recovery
+
+		Section 3. 
+			All is important
+
+			alpha nodes:
+				typa and value tests on facts
+			beta nodes:
+				perform grouping functions & store processed states of graph
+
+			alpha on top, beta on bottom
+
+			Rete graphs can be merged (optimized) when duplicate data flows found
+
+			Each node can be considered a DStream. Alpha nodes are filter or foreach stream operations. Beta nodes are map, reduce, joins. 
+
+
+
+
+
+QUESTIONS:
+	
+	imperative vs delecrative == what and how to do it vs just what to do
+
+	Applicative functor: intermediate between functors and monads
+

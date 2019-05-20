@@ -1,0 +1,24 @@
+
+1. your grand vision
+
+	Create a stream agnostic, purely functional Nodejs library, availalbe in npm, for supporting various streaming encodings for functional composition of streams into pipes which can calculate point based and window kpi's 
+
+		Which would allow for Rapid prototyping of iot applicaitons 
+
+	Use function reactive programming after Nodejs streaming proof of concept is deemed feasible
+
+2. end of semester goals
+
+	Exploratory analysis for FRP as a solution. 
+
+	Create a Nodejs streaming module, using both delarative and imparative paradigms, which allow a user to compose streams into kpi calculation pipes using a notation similar to the kpi formulas. 
+
+	Implement basic Nodejs MQTT clients with an Nodejs server(Express) backend for processing the streams into kpi calculation pipes 
+
+	Hopefully connect this backend data processing server to the front end being designed by Team 5
+
+	
+3. technologies	
+	MQTT
+	Nodejs
+		(using javascript over scala as it's more widely used and there is a market need for web developers to use streaming function composition)

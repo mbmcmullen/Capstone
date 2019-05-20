@@ -1,0 +1,67 @@
+Purpose:
+	- Process large volumes of data that aren't necessarily on a single node
+ 	- computations on large volumes that are non-sequential
+ 	- do the computation on the node where the data is stored and then reduce the results 
+
+ Resilient Distributed Dataset:
+ 	colletion of objects spread accross a cluster
+ 	can be viewed as an array
+
+ 	Cluster:
+ 		driver node:
+ 			main program
+ 		worker nodes:
+ 			get instructions from driver node
+
+ 	Scale by adding more nodes -> no new hardware needed
+
+ 	Immutable data structures
+
+ 	Spark programs are chains of transformations with an RDD being created at each step in a chain of computations
+
+
+
+What makes Spark Spark?
+	RDD aka DataFrame
+	
+		Immutable is important because it allows for the recovery of jobs if they fail at a point. This allows for replication of state
+
+	DAG (Directed Acyclic Graph)
+		MapReduce did not have this feature
+
+		Multi step operational flow control
+
+		Action - (ask a question/ query):
+			- Count
+			- Take
+			- Foreach
+
+		Tranformation
+			- Map
+			- ReduceByKey
+			- GroupByKey
+			- JoinByKey
+
+			dont execute until action is called
+
+		Flume Java
+			do distributed programing with the same code you could do non-dist programming
+
+			Same code can run single threaded in IDE for debugging or multithreaded when I put it on a Cluster
+
+
+	Skew:
+		BAD - when most of the jobs run on a single core
+
+		Managing Parallelism
+			Magic Hash:
+				Add a salt to keys for better distribution
+
+			Cartesian Join
+				n keys joined by n keys = nxn
+					scales exponentially (dist systems scale linearly)
+
+				Fight by using:
+					Nested Structures
+					Windowing
+					ReduceByKey

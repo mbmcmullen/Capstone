@@ -1,0 +1,80 @@
+Section 1: Introduction
+
+	Keep most of the introduction found in second report
+		focus more on need for fault tolerance in RxJS earlier on
+
+		reomve debugger tools need from sponsor
+
+		add rxjs marble diagrams to show how observables and errors currently behave
+
+	include slide 4 material from final presentation
+
+	include slide 5 material from final presentation
+
+	include slide 6 material from final presentation
+
+	include slide 7 material from final presentation
+
+	include slide 8 material from final presentation
+
+
+Section 2: Requirements
+
+	include "scope" section from second report
+
+	include "features" section from second report
+	
+	Add environment version requirements for necessary packages (node, rxjs, etc)
+
+	add steps for how to run demo locally
+
+		should be the same as steps found on github readme
+
+
+
+Section 3: Design
+	
+	include figures 5.2 - 5.5 from second report
+
+	include slide 10 from final presentation
+
+	include slide 11 from final presentation
+
+	include slide 12 from final presentation
+
+	include slide 13 from final presentation
+	
+
+Section 4: Implementation
+	
+	explain encapsulation classes and data flow through architecture
+
+
+Section 5: Testing
+
+	manual testing (see demo video instructions)
+
+	clarify that our project is more exploratory ideation rather than concrete delivarable 
+
+
+Section 6: Conclusion
+	
+	add "conclusion" from second report
+
+
+Section 7: References
+	
+	add citations for academic articles used throughout semester
+
+	add documentation pages we used
+
+	add citations to online articles used throughout the semester
+
+
+Overall changes from Report 2 to Final :
+	
+	Add index at beginning
+
+	Remove glossary of terms and instead just define terms as they arrive
+
+

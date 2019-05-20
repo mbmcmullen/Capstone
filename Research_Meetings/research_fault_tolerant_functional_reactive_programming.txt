@@ -1,0 +1,59 @@
+Fault Tolerant Functional Reactive Programming (Functional Pearl)
+
+	To guarantee that critical systems can operate under high stress over long period of time, ... applications require clear specifications of possible faults and hazards, and how they are being handled. 
+
+	Extensions ... to facilitate tagging reactive transformations with hazard tags or confidence levels. 
+
+	By applying type-level programming ... it is possible to improve static analysis and have compile-time guarantees of key aspects of fault tolerance. 
+
+1 INTRODUCTION:
+	
+	... abstractions like Monadic Stream Functions help bridge the gap between discrete-time causal stream programming and continuous-time FRP
+
+	even when functional reactive and synchronous dataflow systems are implemented according to specifications, they may fail in production due to undetected software bugs in other components, hardware failures, or environmental hazards. 
+		[this impact is minimized through fault tolerance mechanisms]
+
+	the general way of capturing faults in typed functional languages is by means of optional values or values that encode errors... notions of failure or termination [introduced] via the use of 'Maybe' and 'Either' [types]
+
+		[the above] represent detectable failures but are not suitable to represent 'failures that are not detectable or correctable'
+
+2 BACKGROUND:
+	
+	2.1 Functional Reactive Programming
+
+		FRP is a programming paradigm to describe hybrid systems that operate on time-varying data
+
+		'Signal' ... seen as a function from time to values of some type
+
+		'Time' ... is represented as a non-negative real number. 
+
+		running signals in real time [required] to be 'causal'
+			'causal' ... they cannot depend on other signals at future times
+
+		Classic FRP programs structured around signals ... representing internal and external time-varing data
+
+		Arrowized FRP ... [use] causal functions between signals ... connected to the outside world only at the top level
+
+		Monadic Stream Functions (MSF) separate the notion of time from the notion of causal transformation over varying sampled input
+
+	2.2 Monadic Stream Function
+
+		MSFs are defined by a polymorphic type 'MSF' and an evaluation function that applies an 'MSF' to an input and returns, in a monadic context, an output and a continuation:
+			
+			newtype MSF m a b
+			step::Monad m => MSF m a b -> a -> m(b, MSF m a b)
+
+		[NOTE: Causal functions take one the following forms:
+			current output = c.o/p
+			current input = c.i/p
+			past input = p.i/p
+
+			c.o/p => c.i/p
+				OR
+			c.o/p => c.i/p + p.i/p
+				OR
+			c.o/p => p.i/p
+		]
+
+		
+	

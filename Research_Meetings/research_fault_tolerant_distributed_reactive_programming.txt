@@ -1,0 +1,47 @@
+
+
+REScala has first class abstractions for events and signals called "Reactives"
+	Events - produce distinct occurences of values
+		ex: event corresponding to an input field produces the test a user submits
+
+		can be aggregated into signals
+
+	Signal - represent time-changing values
+		ex: spreadsheet cells containing functions dependent on other cells auto update when those cells change
+	
+	Allows for development of reactive applications without Inversion of Control 
+
+	Reactives and their defivations form dynamic 'dataflow graph'
+		nodes - reactives
+		edges - dataflow between reactives
+
+
+2. REScala from User Perspective
+	2.1 Faults	
+		fault - origin of failure
+
+		error - representation of fault in language
+
+		handle crashes & disconnect, don't handle data corruption
+
+		Crashes
+			When a device hosting part of application does one of the following:
+				loss of battery
+				run out of memory
+				OS terminates 
+
+
+		Disconnects
+			broken network links
+
+
+
+Questions:
+	Relation to Rx.js?
+		Rx.js is receving multiple incoming streams thus making these the analogous nodes
+
+		Rx.js then composes the nodes into a dependency graph 
+
+		The reactives on different devices with inter-device dependencies are different than our use case. All of our analogous 'Reactives' will be on the same device but the individual data nodes, without any functional data computations, will be suceptable to errors
+
+

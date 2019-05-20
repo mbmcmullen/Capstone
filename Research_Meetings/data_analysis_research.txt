@@ -1,0 +1,34 @@
+Data Analysis
+
+	find relationships among variables (correlation or causation)
+
+
+	Quantitative message:
+		1. Time-series: single variable captured over a period of time
+			(line chart)
+		2. Ranking: rank x by y
+			(bar chart)
+		3. Part-to-Whole: percentage of inputs that are greater than y
+			(pie chart)
+		4. Deviation: actual versus reference amount
+			(bar chart)
+		5. Frequency distribution: number of observations of variable for given interval that are within a range
+			(histogram)
+		6. Correlation: 
+			(scatter plot)
+
+	Analytical Activities:
+		1. Retrieve Value
+		2. Filter
+		3. Computer Derived Value
+		4. Find Extremum
+		5. Sort
+		6. Determine Range
+		7. Characterize Distribution
+		8. Find anomalies
+		9. Cluster
+		10. Correlate
+		11. Contextualization
+
+
+		

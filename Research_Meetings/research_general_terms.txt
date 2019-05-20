@@ -1,0 +1,39 @@
+Function Composition:
+	Mechanism to combine simple functions to build more complicated ones.
+
+	Result of each function is passed as the argument to the next, and the result of the last one is the result of the whole.
+
+	Ability to easily compose funcitons encourages factoring funcitons for maintainability & code reuse
+
+	Function composition generally applies to functions that operate on finite amounts of data, each step sequentially processing it before handing the modified data to the next function
+
+		Functions operating on potentially infinite data (streams) are known as FILTERS and are instead connected in a pipeline. This is analogous to function composition and can execute concurrently. 
+
+
+First-Class Functions:
+	Functions that can be passed as argument to another function and returning them as the values from other functions. 
+
+	Functions may also be stored in variables & data structures
+
+Higher-Order Functions:
+	Function that takes one or more functions as arguments (procedural parameters)
+
+	OR
+
+	Returns a function as its result
+
+Filters:
+	Subroutine that consumes one stream, producing another stream
+
+	Strung together to form a pipline
+
+	Unix examples:
+		cat, awk, grep
+	
+Isomorphism
+	pair of morphisms (ie functions) f and g such that:
+		f . g = id
+		g . f = id
+
+Futures & Observables
+	Share an isomorphism and are thus composable

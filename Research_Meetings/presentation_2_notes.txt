@@ -1,0 +1,31 @@
+Highlight the path of research so far:
+    MQTT 
+        lightweight TCP based subscribe and Publish mesaging protocol 
+
+    Apache Spark 
+        Process large volumes of streaming data using resilient distributed datasets (RDD = nodes)
+        DAG - multistep operational flow control with Actions and Transformations 
+
+    ThingsBoard.io rule engine
+        Not efficient solution for programmers as the mechanics of stream composition is 
+        abstracted from the user 
+    
+    Node.js Stream Library
+        Reactive programming with Push based Streams
+        Created a module for:
+            Multiplexing and demultiplexing streams
+            Functionally composing streams based on provided callback
+
+    Functional Reactive Programming: REScala
+
+    Main objective switched from 'Glueing' IOT streams together with FRP to Providing Fault
+    Tolerance to existing solutions 
+
+    Fault-Tolerant Distributed Reactive Programming: REScala
+
+    Fault-Tolerance in the context of Rx.js
+
+    
+
+
+

@@ -1,0 +1,60 @@
+Monads
+	flatmap - map but result is a list
+		map and then flatten it
+			if not then get a list of lists
+
+Maintain chunk size
+	if reduce takes in 10 items then reduces to 1
+
+	wait until chunk has 10 items then pass down to the next pipe
+
+Branching issues:
+	Merge:
+		take 3 streams and create 1 stream  
+	Fork: 
+		split 1 stream into multiple stream
+
+All combinator
+	combine 2 or more streams into a stream of tuples
+
+	input is a tuple
+
+	chunk of two tuples or a tuple of two chunks
+
+Race combinator (?)
+	two sources are racing to a destination
+
+Recursive Flow in a pipline (?)
+	* might be no need for it
+
+Look at current implementations that use Node stream:
+	what do they provide/do?
+
+
+After baseline implementation look at FRP relation
+	we'll need to use arrows
+	bind combinator	
+		M bind x -> M'
+		Monad bind input -> Monad'
+						 _________
+						 	|
+						 this is a function
+
+	Arrows are composable
+	Signal: take time, produce values
+		Really interested in Signal Transformer:
+			From signal to another signal 
+
+
+	Real time streaming:
+		don't wait for chunk to be filled
+
+IOT quality of service
+
+	No need for real time analysis sometime
+		analysis done offline
+		no real time constraint
+
+		accomodate delays
+
+		trade off: high efficiency vs accomodting delays

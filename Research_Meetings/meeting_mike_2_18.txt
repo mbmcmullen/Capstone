@@ -1,0 +1,26 @@
+A DataWrapper Class
+	Constructor
+		Data structured as we want it making it easier to handle 
+
+	Creates a new data object
+
+In module pass data objects to middleware functions
+
+Stream class for datawrapper objects
+	Overridden or extended pipe methods:
+		duplicate
+		merge
+		split(mergedStream)
+	Options Object:
+		QOS
+			buffersize
+			dataloss
+			timeout
+
+			speed/frequency of reciept 
+
+
+WEEKLY STATUS EMAIL TO GOYAL
+	2/12 - 2/19
+
+		 

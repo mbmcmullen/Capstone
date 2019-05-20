@@ -1,0 +1,80 @@
+General Considerations:
+	Functional Reactive Programming
+		RXjs
+			observables - represents variables as a stream of values over time
+			Pass around streams
+
+	Shared Git Repo & Google Drive
+		branching system
+
+Michael Background:
+	920 number
+	took 431 w/ tian
+	took js programming with goyal (summer?)
+
+Michael's Ideas so far:
+	1. Create js libarary that accomplishses the same things Thingsboard + node-red do
+
+	2. The library encapsulates different protocols (MQTT, http, etc) and makes connections, delivers/recieves the json messages
+
+	3. Node-Red is powerful due to large number/variety of nodes offered
+
+
+
+Questions:
+	Do spark analytics functions need to convert dynamic stream into static batches or arrays? 
+
+
+
+
+ACTUAL MEETING
+
+	1. your grand vision
+
+		Create an agnostic, purely functional Nodejs library for supporting various streaming encodings for functional composition
+
+		Create a npm package for library
+
+		Use function reactive programming after Nodejs stream proof of concept is deemed feasible
+
+		Rapid prototyping of iot applicaitons  
+
+		Future use for this streaming library include client side streaming processing jobs for non data rate intensive programming 
+
+		Example:
+			compute a point wise kpi with to streams and a constant w/ frp:
+				just write:
+					n * (x+y)
+					n * (stream(x) + stream(y))
+						// produce tuple stream (already done)
+						// n is lifted into a constant stream
+
+			example: use mouse position stream
+				define 'hold' where if the mouse stops at a specific value then those static coordinates  
+	
+	2. end of semester goals
+
+		Exploratory analysis for FRP as a solution. 
+
+		Implement basic Nodejs streaming clients with an server(Express) backend for processing the streams into kpi calculation
+
+		Create a Nodejs streaming library, using both delarative and imparative paradigms, supporting at least one protocol for function composition
+	
+	3. technologies	
+
+		Nodejs (using javascript over scala as it's more widely used and there is a market need for web developers to use streaming function composition)
+
+TODO:
+	1. Polish up the presentation statements for tomorrow
+	2. Set up the outlook shared folder 
+	3. Read and take notes on the FRP articles
+	4. Come up with Questions/Suggestions for Tian meeting (set this up) later this week 
+			FRP
+			Stream library Nodejs/ how js handles streams
+			Functional composition
+			
+
+
+nmcli dev wifi
+nmcli --ask con up UWMWiFi
+

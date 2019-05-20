@@ -1,0 +1,84 @@
+
+IoT Dashboard:
+	Web or desktop based?
+	What kind of data will be receiving?
+		format?
+
+Edge Device (client):
+	Do we simulate the gathering of data?
+
+Was there a specific problem that inspired you to design this capstone?
+
+
+With Goyal as the main instructor, what will be your role as our capstone sponsor?
+
+
+
+existing iot system 
+
+collect data from sensor 
+analyze in engine
+archive
+display 
+
+
+Computing at the edge and the server
+
+We can make a basic assumption that the client
+	mqtt broker 
+		publisher of the data
+
+
+pick a corner case 
+
+	analysis engine
+		flexible 
+
+		rendering and collecting are easy
+
+		analysis is hard
+			data should be real time
+			high rate data is difficult 
+				if we fall behind
+
+		data comes in 
+			preprocessing = problem detection
+			prepare for archiving
+			detect events 
+				streaming analysis 
+					compute fft
+					total harmonic distroation
+			last part it Batch processing (use spark)
+
+			windowing computation => sliding window
+
+		apache spark 
+			base on scala
+			comes with limitation
+				find limiting factors
+
+
+		suppose up to 100 devices of data streaming
+
+
+		make web api
+		accept control
+			control the data analysis 
+
+			client interested in various data anaylsis 
+
+		many people want it to be code free
+
+		create a development environment 
+			analysis platform based on spark 
+
+			assume outlet for stable storage
+			input api for control/execution
+
+			analysis module 
+
+	look at mqtt, spark, how to streaming applications with spark, look at existing iot dashboard
+	freeboard.io 
+
+
+

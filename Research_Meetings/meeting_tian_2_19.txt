@@ -1,0 +1,35 @@
+stream of streams
+	stream 1st class (higher order)
+
+
+Combinator for streams
+	lift
+
+Hard problem to find the average of streams becuase of the factors of deciding when to start or when the average is considered correct.
+
+'back to the future' scholarly article 
+
+down sampling
+
+only sent timestamp
+
+Dynamic behavior would accomadate for nodes dropping off
+	have multiple layers of QOS
+		Don't handle it at all
+		Let the programmer set their own handlers for failures
+		Don't handle the failure but do so gracefully (preferred approach)
+
+	See Promise in JS
+
+	See exception handling in Stream
+		down stream catch handlers
+
+Recursive Streams
+
+Fault tolerance in Streams
+
+Problem more concrete
+	Fault tolerant iot streaming application
+		different streaming rates, dropped data nodes
+
+		

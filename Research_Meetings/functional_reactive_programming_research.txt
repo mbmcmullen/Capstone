@@ -1,0 +1,81 @@
+Functional Reactive Programming Research
+
+	SOURCE_1: wikipedia.org/wiki/Reactive_programming
+
+		Reactive programming is a declarative programming paradigm concerned with data streams 
+
+		Express static (arrays) or dynamic (event emitters) data streams
+
+		example:
+			a:=b+c
+
+			- in imperative programming the value of a is immediately assigned the value of b+c and doesn't change if b or c change in the future
+
+			- in reactive programming the value of a is automatically updated whenever b or c change values, without the program having to reexecute a:=b+c
+
+		Language runtimes are represented by a dependency graph. Nodes represent the act of computing values. Edges represent the dependecy relationships. 
+
+	SOURCE_2: youtube.com/watch?v=49dMGC1hM1o
+
+		title: 'Reactive Programming: Why It Matters'
+
+		Passive Programming:
+			Cart -> 	Invoice 	
+				(remote setters & updaters)
+
+		Reactive Programming:
+			Cart 	 ->	Invoice 	
+				(events, observation, self-updates)
+
+					
+		Passive:	PUBLIC-'Product added' event in cart 	PUBLIC-Update Invoice Method in Invoice
+		Reactive: 	PUBLIC-'Product added' event in cart 	PRIVATE-Update Invoice Method in Invoice
+			
+			In reactive programming the Invoice module would need access to the publicly accessible 'Product added' event in cart in order to react to it
+
+		How does it work vs what does it affect?
+
+			In passive modules/classes the cart class would update an instance of invoice. 
+
+				In order to understand how invoice works one would need to find usages of it's methods in the code base (this is mess)
+
+			In reactive modules, the modules would use publicly available events emitted by other modules. Invoice would listen to cart updating and then react to the event in it's own module.
+
+				In order to understand how the Invoice module works one would only need to look in the module it's self and see what module events it uses. 
+
+
+			Therefore:
+				Reactive is better for konwing how a module works but need to find usages to know what it affects. 
+
+				Passive programming is better for knowing immediately what the module affects but need to find usages to understand how it works. 
+
+				Most programmers want to know how a module works before they know what it affects. 
+
+		In Reactive programming modules don't need to know who or what uses their events
+			Seperation of concerns
+
+		RXjs
+			observables - represents variables as a stream of values over time
+			Pass around streams
+
+		BAD:
+			All reactive programming leads to many singletons
+
+			Passive is great for Data Structures and Dependency Injections
+
+
+		GOOD PASSIVE: invoice unaware of the dependency
+		GOOD REACTIVE: invoice responsible for changing it's self
+
+	SOURCE_: wikipedia.org/wiki/Functional_reactive_programming
+
+		FRP is a programming paradigm for reactive programming using the building blocks of functional programming including map, reduce, filter
+
+		used in GUIs, robotics, games, music
+
+
+	SOURCE_:
+
+	SOURCE_:
+
+	SOURCE_:

@@ -1,0 +1,51 @@
+functional reactive animation (fran) paper
+	explains programming style in the context of animatoin
+	haskell
+
+funcitonal reactive programming (frp) Bogk, Baumegartner, et el
+	style for handling streams
+	just using callbacks doesn't make it frp
+
+
+fault tolerant distrubted programming
+
+distrubted rescala briding between object-oriented and funcitonal styel in reactive applications paper
+
+Back to the future: time travel in FRP
+
+ben calus paper iot dsl ?
+
+RxJS
+
+Push based vs Pull based streams
+
+high order can lead to resource leak
+	prevent by making programming first order 
+
+How does functional reactive programming related to node stream and spark stream? They may or may not be the same thing
+
+Arrows are in a high level view a static pipeline
+
+Programs fail when assumptions fail
+
+which is the best for iot
+	funcitonal reactive programming 
+	fixed pipeline language
+	reactive (nodejs stream)
+
+	Low rate data with many nodes
+
+
+Project outline:
+	1. Filter:
+		research current paradigms for processing iot data and reduce to the best for our case
+
+	2. Create:
+		1. Create MQTT server + Node.js clients virtualized testing environment
+		2. 
+
+	3. Test:
+
+
+	4. Refactor:
+

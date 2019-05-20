@@ -1,0 +1,119 @@
+
+source1: https://www.youtube.com/watch?v=eS4nx6tLSLs
+	'What is MQTT?'
+
+		Message Queue Telemetry Transport
+		TCP based Subscribe and Publish messaging protocol
+		Supports machine to machine interactions
+		Developed by IBM
+		Based on Hub and Spoke model
+
+		Broker: acts as a gateway/server/reciever for clients
+			allows for the client to send messages to and recieve messages from the broker if it is subscribed to it
+
+			'Post Office' model
+				Broker is the PostOffice and clients would be the homes it services 
+
+		Allows for username and password auth
+
+
+source2: mosquitto.org/man/mqtt-7.html
+	NOTE: mosquitto is an open source message broker that implements the MQTT 3.1.1/3.1 message protocol
+
+	1. Topics / Subscriptions
+		
+		topics used as a hierarchy similar to linux file system
+			ex: sensors/COMPUTER_NAME/temperature/HARDRIVE_NAME
+
+		wildcards
+			to receive temperature info from all computers and harddrives subscribe to following:	
+				sensors/+/temperature/+
+
+			a/b/c/d
+				a/b/c/d
+				+/b/c/d
+				a/+/c/d
+				+/+/+/+
+
+				#
+				a/#
+				a/b/#
+				a/b/c/#
+				+/b/c/#
+
+	2. Quality of Service (QoS)
+		
+		3 levels of QoS
+			QoS 0 (lowest), QoS 1, QoS 2 (highest)
+
+		0: broker/client send message once, no confirmation
+		1: broker/client send message @ least once, confirmation required
+		2: broker/client send message excatly once, using a four step handshake
+
+	3. Retained Messages
+		
+		Messages may be set to retained
+		
+		Broker saves messages so that when a new client subscribes they can be updated with last message rather than waiting an interminable period for the next message
+
+	4. Clean session / Durable connections
+		
+		Clean session (aka clean start) flag set on connection
+			if true, when a node disconnects all subscribtions and messages will NOT be saved
+		
+		Durable connection:
+			client who's clean session flag is false
+
+	5. Wills
+
+		client may give broker message to send when client disconnects unexpectedly
+
+
+	NOTE: messages have a topic, QoS, and retain status
+
+
+source3: wikipedia.org/wiki/Data_analysis
+	
+	Real Time Analysis vs Real Time Visualization
+
+	
+	Real Time Analysis 
+		Descriptive Statistics: mean, median, standard deviation, etc. 
+
+		Quantitative messages: (used for general data analysis)
+
+			Time-series: variables tracked over time (line-chart)
+			
+			Ranking: subdivisions ranked by relations (highest temperature of a node per hour) (bar chart)
+
+			Part-to-whole: ratio (pie chart)
+
+			Deviation: comparision against a reference 
+
+			frequency distribution: (histogram)
+
+			Correlation: relationship between two variables, x and y (scatterplot)
+
+		Analytical Activities: (used for particular data points of interest)
+			
+			Retrieve Value
+
+			Filter
+
+			Compute Derived Value
+
+			Find Extremum
+
+			Sort
+
+			Determine Range
+
+			Characterize Distribution
+
+			Find Anomalies
+
+			Cluster
+
+			Correlate
+
+			Contextualization

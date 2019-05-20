@@ -1,0 +1,86 @@
+MEET Mike
+	Outline
+		Plan Demo environment
+			Docker
+				Mosquitto
+				Node.js MQTT clients
+				Express server (2 ports)
+					1st port:
+						MQTT Broker data
+					2nd port:
+						Status of node.js clients
+			
+			Middleware KPI calculating Express Server
+
+			Node monitoring/manipulating webpage
+				D3.js visualization of node status and dependencies
+
+		Create graph for new project demo architecture
+
+		Update node dependency graph to illustrate KPIs can depend on other KPIs
+
+		Project Report 2 1st draft
+		
+		Plan next meeting (Saturday)
+			Docker
+				Research and download
+				Create docker image with Mosquitto Broker and Node.js MQTT clients
+				Express Server serving the Mosquitto Broker Topics
+
+			Set up KPI Express Server 
+				Set up mock KPI calculations with RX.js observables using static data 
+					Refactor on Saturday's meeting to use streaming data from dockerimage broker 
+
+
+	Project 2 vs Project 1 Notes:
+		General
+			Switch the order of the solution overview section with the features section. Number the figures and reference the figures in the Features section
+
+
+		1. Introduction
+			Modify paragraph 2 to state that RX.js doe shte splitting and combine and functional composition of streams
+
+			RX.js issue is that on error Rx.js closes the observable. 
+				Why is that bad
+
+		2. Glossary
+			Add Observable, RX.js
+
+		3. Scope
+			Change Node.js streame module to be RX.js module
+				More robust error handling 
+				Debugging statements
+				Fail-soft: attempt recovery on error and don't crash entire system when a node fails
+
+			Distinguish that nodejs clients are an abstraction for iot devices publishing to their own seperate topics (see contraints)
+
+			Add simple webpage to display kpi's and node status dependecy graph 
+
+		5. Features
+			Repleace the middleware module with an explanation of our middleware as being an extension of RX.js to handle faults and produce clear debugging statements
+				handling error propogation where it occurs and make sure that dependent nodes downstream are aware of a fault upstream
+
+			Discuss our simulation of disconnection of clients by unsubscribing to a topic that the client was publishing to
+				Resubscribe to simulate the reconnection of a client 
+
+			Change API to 'KPI'
+		
+		6. Solution Overview
+			Remove existing middleware example graph
+
+			Create illustration of whiteboard demo architecture
+
+			Create illustration showing KPI's dependent on other KPI's (add to 2nd Presentation)
+
+		7. Constraints
+			RX.js default behaviour for error handling closes an observable 
+
+			Is RX.js conducive to be extended or do we need to wrap the functionality of the observable's error handling 
+
+			Assumption of IOT publish/subscribe to own topics 
+
+				/temperature/source1
+				/temperature/source2
+
+				/temperature
+

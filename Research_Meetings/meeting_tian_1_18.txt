@@ -1,0 +1,38 @@
+y = f2(f2(x))
+
+vs 
+
+y = (f1 o f2)(x)
+	functional composition
+
+
+How can we implement thingboard.io functionality through a spark only streaming composition 
+
+
+Arrows
+	Monads (LOOK AT THESE)
+		Datastructure
+		List is a monad
+	promises are eager, arrows are lazy
+	Can do a check before a run 
+	Designed for async and not streaming
+	Originally defined in Haskell
+
+Search for something in js that implements spark stream
+
+	Then spark functionality could be implemented in node
+
+
+proc notation
+	Haskell
+
+list comprehension
+	is a monad 
+
+
+TODO:
+	Research:
+		Arrows, Monads
+	JS streaming -> see file streaming
+	Search for something in js that implements spark stream
+	Look into Spark spark stream (research paper)
